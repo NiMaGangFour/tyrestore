@@ -14,13 +14,13 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <Navbar bg="light" expand="lg">
+        <Navbar fixed="top" expand="lg" bg="dark" variant="dark">
           {" "}
           <Navbar.Brand>
-            <Nav.Link to="/">
+            <Nav.Link href="/">
               <img
-                width="30"
-                height="30"
+                width="170"
+                height="70"
                 className="d-inline-block align-top"
                 src={Logo_White}
                 alt="logo"
