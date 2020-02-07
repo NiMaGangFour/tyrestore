@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 import {
   Navbar,
   Nav,
@@ -17,8 +16,8 @@ class Header extends Component {
       <div>
         <Navbar bg="light" expand="lg">
           {" "}
-          <Navbar.Brand href="#home">
-            <NavLink to="/">
+          <Navbar.Brand>
+            <Nav.Link to="/">
               <img
                 width="30"
                 height="30"
@@ -26,15 +25,15 @@ class Header extends Component {
                 src={Logo_White}
                 alt="logo"
               ></img>
-            </NavLink>
+            </Nav.Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <NavLink to="/about">About</NavLink>
-              <NavLink href="/contact">Contact</NavLink>
-              <NavLink href="/news">News</NavLink>
-              <NavLink href="/faq">FAQs</NavLink>
+              <Nav.Link href="/about">About</Nav.Link>
+              <Nav.Link href="/contact">Contact</Nav.Link>
+              <Nav.Link href="/news">News</Nav.Link>
+              <Nav.Link href="/faq">FAQs</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
