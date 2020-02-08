@@ -13,9 +13,20 @@ class UICard03 extends Component {
   render() {
     return (
       <div>
-        <Row className="justify-content-md-center row-ct">
-          <Col sm={4}>
-            <Card style={{ width: "10rem" }}>
+        <Row className="justify-content-md-center">
+          <Col lg="4">
+            <Card style={{ border: "none" }}>
+              <div className="icon">
+                <IoIosCheckmarkCircleOutline />
+              </div>
+              <Card.Body>
+                <Card.Title>Card Title</Card.Title>
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col lg="4">
+            <Card style={{ border: "none" }}>
               <div className="icon">
                 <FaShippingFast />
               </div>
@@ -25,21 +36,10 @@ class UICard03 extends Component {
               </Card.Body>
             </Card>
           </Col>
-          <Col sm={4}>
-            <Card style={{ width: "10rem" }}>
+          <Col lg="4">
+            <Card style={{ border: "none" }}>
               <div className="icon">
-                <FaShippingFast />
-              </div>
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col sm={4}>
-            <Card style={{ width: "10rem" }}>
-              <div className="icon">
-                <FaShippingFast />
+                <IoIosHeartEmpty />
               </div>
               <Card.Body>
                 <Card.Title>Card Title</Card.Title>
