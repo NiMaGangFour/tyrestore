@@ -1,0 +1,19 @@
+$color_font_01: #2b4992;
+
+$margin_top: 30px;
+
+.card_title {
+  margin-top: $margin_top;
+  font-size: 25px;
+  color: $color_font_01;
+}
+.card_text {
+  font-size: 20px;
+  margin-top: $margin_top;
+}
+.card_btn {
+  font-weight: 600;
+  font-size: 20px;
+  padding: 5px 25px;
+  margin-top: $margin_top;
+}

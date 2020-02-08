@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 import { Card, Button } from "react-bootstrap";
+import "./UICard.scss";
+
 class UICard extends Component {
   componentDidMount() {
     console.log(this.props);
@@ -8,15 +10,18 @@ class UICard extends Component {
   render() {
     return (
       <div>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+        <Card>
+          <Card.Img
+            variant="top"
+            src={this.props.CardImg}
+            style={this.props.CardImgStyle}
+          />
           <Card.Body>
             <Card.Title>{this.props.cardTitle}</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Card.Text>{this.props.cardText}</Card.Text>
+            <Button className="card_btn" variant={this.props.cardButtonVarient}>
+              {this.props.cardButtomText}
+            </Button>
           </Card.Body>
         </Card>
       </div>
