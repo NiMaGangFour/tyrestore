@@ -1,0 +1,26 @@
+$theme_color1: #2b4992;
+$theme_color2: #51338b;
+$theme_color3: #2b3c90;
+
+.card-bg-01 {
+  background-color: rgba(172, 152, 197, 0.4);
+}
+
+.card-title {
+  color: $theme_color1;
+}
+
+.card-text {
+  color: $theme_color2;
+}
+
+.btn-01 {
+  color: #fff;
+  background-color: $theme_color3;
+  transition: border 1s, color 1s, background-color 1s;
+  &:hover {
+    color: $theme_color3;
+    border: 1px solid $theme_color3;
+    background-color: #fff !important;
+  }
+}

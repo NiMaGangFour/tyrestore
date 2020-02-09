@@ -1,5 +1,13 @@
+$theme_color: #2b4992;
+
 .icon {
+  color: $theme_color;
   font-size: 50px;
   margin-top: 20px;
   text-align: center;
+}
+
+.body-text {
+  color: $theme_color;
+  font-weight: 400;
 }

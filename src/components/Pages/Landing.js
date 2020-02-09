@@ -14,6 +14,7 @@ import tyre_04 from "../css/images/tyre_04.png";
 import UICard from "../UI/UICard";
 import UICard02 from "../UI/UICard02";
 import UICard03 from "../UI/UICard03";
+import UIFunctionCard from "../UI/UIFunctionCard";
 
 class Landing extends Component {
   render() {
@@ -115,9 +116,10 @@ class Landing extends Component {
             </Col>
           </Row>
           <Row className="justify-content-md-center row-ct">
-            <Col sm={6}>
-              <UICard03 />
-            </Col>
+            <UICard03 />
+          </Row>
+          <Row className="justify-content-md-center row-ct">
+            <UIFunctionCard />
           </Row>
         </Container>
       </div>
