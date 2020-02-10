@@ -24,8 +24,34 @@ class UIFunctionCard extends Component {
                 <Button className="btn-01">Go somewhere</Button>
               </Card.Body>
 
-              <Form.Row>
-                <Form.Group as={Col} controlId="formGridCity">
+              <Form.Group as={Row} controlId="formPlaintextEmail">
+                <Form.Label column sm="3">
+                  Email
+                </Form.Label>
+                <Col sm="3">
+                  <Form.Control as="select">
+                    <option>MPV</option>
+                    <option>SUV</option>
+                    <option>Hatch</option>
+                    <option>Wagon</option>
+                    <option>Sedan</option>
+                  </Form.Control>
+                </Col>
+                <Form.Label column sm="3">
+                  Email
+                </Form.Label>
+                <Col sm="3">
+                  <Form.Control as="select">
+                    <option>MPV</option>
+                    <option>SUV</option>
+                    <option>Hatch</option>
+                    <option>Wagon</option>
+                    <option>Sedan</option>
+                  </Form.Control>
+                </Col>
+              </Form.Group>
+              {/* <Form.Row>
+                <Form.Group as={Row} controlId="formGridCity">
                   <Form.Label>My car is a </Form.Label>
                 </Form.Group>
 
@@ -49,7 +75,7 @@ class UIFunctionCard extends Component {
                     <option>...</option>
                   </Form.Control>
                 </Form.Group>
-              </Form.Row>
+              </Form.Row> */}
             </Card>
           </Col>
         </Row>
