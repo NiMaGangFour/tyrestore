@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { Card, Button, Row, Col, Form } from "react-bootstrap";
 import { FaShippingFast } from "react-icons/fa";
 import { IoIosCheckmarkCircleOutline, IoIosHeartEmpty } from "react-icons/io";
 
@@ -23,6 +23,33 @@ class UIFunctionCard extends Component {
                 <Card.Text className="card-text">We're here to help</Card.Text>
                 <Button className="btn-01">Go somewhere</Button>
               </Card.Body>
+
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridCity">
+                  <Form.Label>My car is a </Form.Label>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridState">
+                  <Form.Control as="select">
+                    <option>MPV</option>
+                    <option>SUV</option>
+                    <option>Hatch</option>
+                    <option>Wagon</option>
+                    <option>Sedan</option>
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridZip">
+                  <Form.Label>&</Form.Label>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridState">
+                  <Form.Control as="select">
+                    <option>Choose...</option>
+                    <option>...</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form.Row>
             </Card>
           </Col>
         </Row>
