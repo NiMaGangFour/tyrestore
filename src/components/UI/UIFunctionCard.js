@@ -41,35 +41,12 @@ class UIFunctionCard extends Component {
                 </Col>
               </Form.Group>
             </Form>
-            <Button className="btn-01">Go somewhere</Button>
+            <Card.Text className="card-text" style={{ width: "auto" }}>
+              This is NOT a 100% correct reference tool and is not intended to
+              replace advice from your auto mechanical professional.
+            </Card.Text>
+            <Button className="btn-01">View Our Products</Button>
           </Card.Body>
-
-          {/* <Form.Row>
-                <Form.Group as={Row} controlId="formGridCity">
-                  <Form.Label>My car is a </Form.Label>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridState">
-                  <Form.Control as="select">
-                    <option>MPV</option>
-                    <option>SUV</option>
-                    <option>Hatch</option>
-                    <option>Wagon</option>
-                    <option>Sedan</option>
-                  </Form.Control>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridZip">
-                  <Form.Label>&</Form.Label>
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formGridState">
-                  <Form.Control as="select">
-                    <option>Choose...</option>
-                    <option>...</option>
-                  </Form.Control>
-                </Form.Group>
-              </Form.Row> */}
         </Card>
       </div>
     );
