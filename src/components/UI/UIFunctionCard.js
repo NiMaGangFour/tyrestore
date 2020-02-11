@@ -13,23 +13,17 @@ class UIFunctionCard extends Component {
   render() {
     return (
       <div>
-        <Row>
-          <Col>
-            <Card className="card-bg-01">
-              <Card.Body>
-                <Card.Title className="card-title">
-                  Do you know which product to choose ?
-                </Card.Title>
-                <Card.Text className="card-text">We're here to help</Card.Text>
-                <Button className="btn-01">Go somewhere</Button>
-              </Card.Body>
-
-              <Form.Group as={Row} controlId="formPlaintextEmail">
-                <Form.Label column sm="3">
-                  Email
-                </Form.Label>
-                <Col sm="3">
-                  <Form.Control as="select">
+        <Card className="card-bg-01">
+          <Card.Body>
+            <Card.Title className="card-title">
+              Do you know which product to choose ?
+            </Card.Title>
+            <Card.Text className="card-text">We're here to help</Card.Text>
+            <Form>
+              <Form.Group>
+                <Form.Label column>My car is a</Form.Label>
+                <Col>
+                  <Form.Control className="form-select" as="select">
                     <option>MPV</option>
                     <option>SUV</option>
                     <option>Hatch</option>
@@ -37,20 +31,20 @@ class UIFunctionCard extends Component {
                     <option>Sedan</option>
                   </Form.Control>
                 </Col>
-                <Form.Label column sm="3">
-                  Email
-                </Form.Label>
-                <Col sm="3">
-                  <Form.Control as="select">
-                    <option>MPV</option>
-                    <option>SUV</option>
-                    <option>Hatch</option>
-                    <option>Wagon</option>
-                    <option>Sedan</option>
+                <Form.Label column>with</Form.Label>
+                <Col>
+                  <Form.Control className="form-select" as="select">
+                    <option>FWD</option>
+                    <option>RWD</option>
+                    <option>AWD</option>
                   </Form.Control>
                 </Col>
               </Form.Group>
-              {/* <Form.Row>
+            </Form>
+            <Button className="btn-01">Go somewhere</Button>
+          </Card.Body>
+
+          {/* <Form.Row>
                 <Form.Group as={Row} controlId="formGridCity">
                   <Form.Label>My car is a </Form.Label>
                 </Form.Group>
@@ -76,9 +70,7 @@ class UIFunctionCard extends Component {
                   </Form.Control>
                 </Form.Group>
               </Form.Row> */}
-            </Card>
-          </Col>
-        </Row>
+        </Card>
       </div>
     );
   }
