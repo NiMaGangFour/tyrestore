@@ -11,10 +11,18 @@ import tyre_01 from "../css/images/tyre_01.png";
 import tyre_02 from "../css/images/tyre_02.png";
 import tyre_03 from "../css/images/tyre_03.png";
 import tyre_04 from "../css/images/tyre_04.png";
+import img_Bridgeston from "../css/images/Bridgestone Potenza Adrenalin RE003 Tyres 195:60R15 88V.png";
+import img_Continental_01 from "../css/images/Continental ContiSportContact 3.png";
+import img_Continental_02 from "../css/images/Continental UltraContact UC6 Tyres 205:65R15 94V.png";
+import img_Michelin from "../css/images/Michelin Primacy 4 Tyres 205:55R16 91W $149.png";
+import big_circle_img from "../css/images/big_circle_img.png";
+
 import UICard from "../UI/UICard";
 import UICard02 from "../UI/UICard02";
 import UICard03 from "../UI/UICard03";
 import UIFunctionCard from "../UI/UIFunctionCard";
+import UIFunctionCard02 from "../UI/UIFunctionCard02";
+import UIFeaturedCard from "../UI/UIFeaturedCard";
 
 class Landing extends Component {
   render() {
@@ -120,6 +128,82 @@ class Landing extends Component {
           </Row>
           <Row className="justify-content-md-center row-ct">
             <UIFunctionCard />
+          </Row>
+          <Row className="justify-content-md-center row-ct">
+            <h2 className="header-h2 row-ct">Featured products</h2>
+          </Row>
+          <Row className="justify-content-md-center row-ct">
+            <Col md={6} lg="3">
+              <UIFeaturedCard
+                cardTitle="Bridgestone Potenza Adrenalin RE003"
+                cardLink="View product"
+                CardImg={img_Bridgeston}
+                CardImgStyle={{
+                  height: "15rem",
+                  width: "100%"
+                }}
+                cardButtomText="Shop"
+                cardButtonVarient="outline-primary"
+              />
+            </Col>
+            <Col md={6} lg="3">
+              <UIFeaturedCard
+                cardTitle="Continental ContiSportContact"
+                cardLink="View product"
+                CardImg={img_Continental_01}
+                CardImgStyle={{
+                  height: "15rem",
+                  width: "100%"
+                }}
+                cardButtomText="Shop"
+                cardButtonVarient="outline-primary"
+              />
+            </Col>
+            <Col md={6} lg="3">
+              <UIFeaturedCard
+                cardTitle="Continental UltraContact"
+                cardLink="View product"
+                CardImg={img_Continental_02}
+                CardImgStyle={{
+                  height: "15rem",
+                  width: "100%"
+                }}
+                cardButtomText="Shop"
+                cardButtonVarient="outline-primary"
+              />
+            </Col>
+            <Col md={6} lg="3">
+              <UIFeaturedCard
+                cardTitle="Michelin Primacy 4 Tyres"
+                cardLink="View product"
+                CardImg={img_Michelin}
+                CardImgStyle={{
+                  height: "15rem",
+                  width: "100%"
+                }}
+                cardButtomText="Shop"
+                cardButtonVarient="outline-primary"
+              />
+            </Col>
+          </Row>
+          <Row className="justify-content-md-center row-ct-02">
+            <UIFunctionCard02
+              CardImg={big_circle_img}
+              CardImg_style={{
+                width: "auto",
+                position: "absolute",
+                bottom: "0"
+              }}
+              cardTitle="Michelin Primacy 4 Tyres"
+              cardText="
+             Some quick example text to build on the card title and make up
+             the bulk of the card's content."
+              list_01="> Buy 4 items and save on delivery"
+              list_02="> Re-order your favourite product with ease"
+              list_03="> Manage your account details and keep track of your purchases"
+              cardBtn_01="Join TyreStore"
+              cardBtn_02="Login"
+            />
           </Row>
         </Container>
       </div>
