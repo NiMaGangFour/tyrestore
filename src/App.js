@@ -10,6 +10,7 @@ import About from "./components/Pages/About";
 import Contact from "./components/Pages/Contact";
 import FAQ from "./components/Pages/FAQ";
 import News from "./components/Pages/News";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/faq" component={FAQ} />
         <Route exact path="/news" component={News} />
       </Switch>
+      <Footer />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
