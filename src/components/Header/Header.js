@@ -8,13 +8,21 @@ import {
   Button
 } from "react-bootstrap";
 
+import "../css/Components.css";
+
 import Logo_White from "../css/images/logoWhite.png";
 
 class Header extends Component {
   render() {
     return (
       <div>
-        <Navbar fixed="top" expand="lg" bg="dark" variant="dark">
+        <Navbar
+          fixed="top"
+          expand="lg"
+          bg="dark"
+          variant="dark"
+          className="header-bg"
+        >
           {" "}
           <Navbar.Brand>
             <Nav.Link href="/">
