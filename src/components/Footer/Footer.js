@@ -90,6 +90,9 @@ class Footer extends Component {
                 color: "white",
                 border: "none"
               }}
+              style_a={{
+                color: "white"
+              }}
               list_title="OUR BRANDS"
               list_text_01="Bridgestone"
               list_text_02="Michelin"
@@ -146,21 +149,27 @@ class Footer extends Component {
           </Col>
         </Row>
 
-        <Navbar style={{ backgroundColor: "#fff" }}>
-          <Navbar.Text>
-            Copyright © 2020 TyreStore{" "}
-            <Nav.Link href="/">
-              <img
-                width="70"
-                height="30"
-                className="d-inline-block align-top"
-                src={logo_dark}
-                alt="logo"
-              ></img>
-            </Nav.Link>
-          </Navbar.Text>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
+        <Nav
+          style={{ backgroundColor: "#fff" }}
+          className="justify-content-center"
+          activeKey="/home"
+        >
+          <Nav.Item style={{ paddingRight: "10px" }}>
+            <Navbar.Text>
+              Copyright © 2020 TyreStore{" "}
+              <Nav.Link href="/">
+                <img
+                  width="70"
+                  height="30"
+                  className="d-inline-block align-top"
+                  src={logo_dark}
+                  alt="logo"
+                ></img>
+              </Nav.Link>
+            </Navbar.Text>
+          </Nav.Item>
+
+          <Nav.Item style={{ paddingLeft: "10px" }}>
             <Navbar.Text>
               Powered By{" "}
               <Nav.Link href="/">
@@ -173,8 +182,8 @@ class Footer extends Component {
                 ></img>
               </Nav.Link>
             </Navbar.Text>
-          </Navbar.Collapse>
-        </Navbar>
+          </Nav.Item>
+        </Nav>
       </div>
     );
   }

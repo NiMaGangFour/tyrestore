@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Nav,
   Row,
   Col,
   ListGroup,
@@ -42,7 +43,9 @@ class UIList extends Component {
             </span>
           </ListGroup.Item>
           <ListGroup.Item style={this.props.style}>
-            {this.props.list_text_01}
+            <a style={this.props.style_a} href="/">
+              {this.props.list_text_01}
+            </a>
           </ListGroup.Item>
           <ListGroup.Item style={this.props.style}>
             {this.props.list_text_02}
