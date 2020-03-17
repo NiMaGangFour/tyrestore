@@ -10,6 +10,7 @@ import About from "./components/Pages/About";
 import Contact from "./components/Pages/Contact";
 import FAQ from "./components/Pages/FAQ";
 import News from "./components/Pages/News";
+import Tyres from "./components/Pages/Tyres";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/faq" component={FAQ} />
         <Route exact path="/news" component={News} />
+
+        <Route exact path="/tyres" component={Tyres} />
       </Switch>
       <Footer />
       <header className="App-header">
