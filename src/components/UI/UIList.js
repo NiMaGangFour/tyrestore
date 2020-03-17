@@ -48,13 +48,19 @@ class UIList extends Component {
             </a>
           </ListGroup.Item>
           <ListGroup.Item style={this.props.style}>
-            {this.props.list_text_02}
+            <a style={this.props.style_a} href="/">
+              {this.props.list_text_02}
+            </a>
           </ListGroup.Item>
           <ListGroup.Item style={this.props.style}>
-            {this.props.list_text_03}
+            <a style={this.props.style_a} href="/">
+              {this.props.list_text_03}
+            </a>
           </ListGroup.Item>
           <ListGroup.Item style={this.props.style}>
-            {this.props.list_text_04}
+            <a style={this.props.style_a} href="/">
+              {this.props.list_text_04}
+            </a>
           </ListGroup.Item>
         </ListGroup>
       </div>

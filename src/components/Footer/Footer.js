@@ -108,6 +108,9 @@ class Footer extends Component {
                 color: "white",
                 border: "none"
               }}
+              style_a={{
+                color: "white"
+              }}
               list_title="OUR PRODUCTS"
               list_text_01="Summer tyres"
               list_text_02="All-season & All-terrain tyres"
@@ -122,6 +125,9 @@ class Footer extends Component {
                 backgroundColor: "#2b3c90",
                 color: "white",
                 border: "none"
+              }}
+              style_a={{
+                color: "white"
               }}
               list_title="HELP"
               list_text_01="About us"
@@ -140,6 +146,9 @@ class Footer extends Component {
               }}
               listHeaderStyle={{
                 fontSize: "30px !important"
+              }}
+              style_a={{
+                color: "white"
               }}
               list_title="POLICIES"
               list_text_01="Terms & Conditions"
