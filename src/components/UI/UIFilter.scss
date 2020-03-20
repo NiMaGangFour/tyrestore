@@ -1,0 +1,30 @@
+$theme_color: #2b4992;
+
+h4 {
+  margin: 20px 0px -2px 0px !important;
+}
+
+.btn-clear {
+  background-color: #fff;
+  color: $theme_color;
+  margin: 20px 0px 0px 0px !important;
+  width: 100%;
+  border: 2px solid $theme_color;
+  &:hover {
+    background-color: $theme_color;
+    color: #fff;
+  }
+}
+
+.btn-search {
+  background-color: $theme_color;
+  color: #fff;
+
+  width: 100%;
+  margin: 20px 0px 0px 0px !important;
+  border: 2px solid $theme_color;
+  &:hover {
+    background-color: #fff;
+    color: $theme_color;
+  }
+}
