@@ -17,3 +17,9 @@
 .filer-heading {
   font-size: 30px;
 }
+
+.pagination {
+  float: right;
+  width: auto;
+  border: 3px solid green;
+}

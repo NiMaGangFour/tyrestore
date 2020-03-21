@@ -1,7 +1,50 @@
-.prod-card {
-  width: 16rem;
+$break-2560: 2560px;
+$break-1440: 1440px;
+$break-1024: 1024px;
+$break-768: 768px;
+$break-425: 425px;
+$break-375: 375px;
+$break-320: 320px;
+
+@media only screen and (max-width: $break-2560) {
+  .prod-card {
+    width: 19rem;
+  }
+
+  .col-card {
+    padding: 0px 0px 0px 10px !important;
+  }
 }
 
-.col-card {
-  padding: 0px 0px 0px 2px !important;
+@media only screen and (max-width: $break-1024) {
+  .prod-card {
+    width: 16rem;
+  }
+}
+
+@media only screen and (max-width: $break-425) {
+  .prod-card {
+    width: 13rem;
+  }
+  .col-card {
+    padding: 0px 0px 0px 3px !important;
+  }
+}
+@media only screen and (max-width: $break-375) {
+  .prod-card {
+    width: 11.7rem;
+  }
+  .col-card {
+    padding: 0px 0px 0px 0px !important;
+  }
+}
+
+@media only screen and (max-width: $break-320) {
+  .prod-card {
+    width: 10rem;
+  }
+}
+
+.prod-card {
+  margin-bottom: 10px;
 }
