@@ -154,6 +154,7 @@ class Footer extends Component {
               list_text_01="Terms & Conditions"
               list_text_02="Privacy Policy"
               list_text_03="Purchasing Policy"
+              list_text_04="Purchasing Policy"
             />
           </Col>
         </Row>
