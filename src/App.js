@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Switch } from "react-router-dom";
@@ -16,7 +16,8 @@ import Footer from "./components/Footer/Footer";
 
 class App extends Component {
   state = {
-    data: null
+    data: null,
+    noteData: null
   };
 
   componentDidMount() {
@@ -24,10 +25,24 @@ class App extends Component {
     this.callBackendAPI()
       .then(res => this.setState({ data: res.express }))
       .catch(err => console.log(err));
+
+    this.callNote()
+      .then(res => this.setState({ noteData: res.express }))
+      .catch(err => console.log(err));
   }
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
     const response = await fetch("/express_backend");
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    return body;
+  };
+
+  callNote = async () => {
+    const response = await fetch("/note");
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -67,6 +82,8 @@ class App extends Component {
         {/* // Render the newly fetched data inside of this.state.data  */}
         <h1>Express works?</h1>
         <p className="App-intro">{this.state.data}</p>
+        <h1>Get Data from MongoDB?</h1>
+        <p className="App-intro">{this.state.noteData}</p>
       </div>
     );
   }

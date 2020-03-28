@@ -1,12 +1,11 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import "../css/Components.css";
 import UIFilter from "../UI/UIFilter";
 import UIProList from "../UI/UIProList";
-import Posts from "../UI/Post";
 import Pagination from "../UI/Pagination";
 function Tyres() {
   const [posts, setPosts] = useState([]);
