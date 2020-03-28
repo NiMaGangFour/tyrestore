@@ -28,6 +28,7 @@ router.post("/", async (req, res) => {
 //查找对应id的数据
 router.get("/:postId", async (req, res) => {
   try {
+    console.log(req.params);
     const findPost = await Post.findById(req.params.postId);
     res.json(findPost);
   } catch (err) {

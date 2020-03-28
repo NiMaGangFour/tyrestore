@@ -27,14 +27,15 @@ class App extends Component {
       .catch(err => console.log(err));
 
     this.callNote()
-      .then(res => this.setState({ noteData: res.express }))
+
+      .then(res => this.setState({ noteData: res[0].title }))
       .catch(err => console.log(err));
   }
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
     const response = await fetch("/express_backend");
     const body = await response.json();
-
+    console.log(body);
     if (response.status !== 200) {
       throw Error(body.message);
     }
@@ -44,7 +45,8 @@ class App extends Component {
   callNote = async () => {
     const response = await fetch("/note");
     const body = await response.json();
-
+    console.log(body);
+    console.log(body);
     if (response.status !== 200) {
       throw Error(body.message);
     }

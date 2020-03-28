@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const Note = require("./models/noteModel");
 const postRoute = require("./routes/postRoute");
+const prodRoute = require("./routes/prodRoute");
 
 const port = process.env.PORT || 5000;
 // const mongoose = require("mongoose");
@@ -51,6 +52,7 @@ app.use(bodyParser.json({ type: "application/json" })).use(
 
 // Apply middleware
 app.use("/posts", postRoute);
+app.use("/prods", prodRoute);
 // Route to save a new note - POST method
 app.post("/note", async (req, res) => {
   try {
