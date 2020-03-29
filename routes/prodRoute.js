@@ -1,5 +1,4 @@
 const Prod = require("../models/prodModel");
-
 const express = require("express");
 const router = express.Router();
 
@@ -20,7 +19,8 @@ router.post("/", async (req, res) => {
     prod_price: req.body.prod_price,
     prod_info: req.body.prod_info,
     prod_details: req.body.prod_details,
-    prod_status: req.body.prod_status
+    prod_status: req.body.prod_status,
+    prod_upload_date: req.body.prod_upload_date
   });
   try {
     const saveProd = await prod.save();

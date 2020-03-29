@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Switch } from "react-router-dom";
-
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header/Header";
@@ -27,8 +25,7 @@ class App extends Component {
       .catch(err => console.log(err));
 
     this.callNote()
-
-      .then(res => this.setState({ noteData: res[0].title }))
+      .then(res => this.setState({ noteData: res[0].prod_brand }))
       .catch(err => console.log(err));
   }
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
@@ -43,9 +40,8 @@ class App extends Component {
   };
 
   callNote = async () => {
-    const response = await fetch("/note");
+    const response = await fetch("/prods");
     const body = await response.json();
-    console.log(body);
     console.log(body);
     if (response.status !== 200) {
       throw Error(body.message);
