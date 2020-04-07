@@ -11,11 +11,15 @@
     "bootstrap": "^4.4.1",
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",
+    "ejs": "^3.0.2",
     "express": "^4.17.1",
+    "gridfs-stream": "^1.1.1",
+    "method-override": "^3.0.0",
     "mongodb": "^3.5.5",
-    "mongoose": "^5.9.5",
+    "mongoose": "^5.9.7",
+    "multer": "^1.4.2",
+    "multer-gridfs-storage": "^4.0.3",
     "node-sass": "^4.13.1",
-    "nodemon": "^2.0.2",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
@@ -28,6 +32,7 @@
     "client": "react-scripts start",
     "server": "nodemon server.js",
     "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"nodemon server.js\" \"npm run client\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,5 +52,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/"
+  "proxy": "http://localhost:5000/",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }

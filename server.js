@@ -1,11 +1,31 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-// const Note = require("./models/noteModel");
+const crypto = require("crypto");
+const mongoose = require("mongoose");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+const methodOverride = require("method-override");
+
+const app = express();
+
 const postRoute = require("./routes/postRoute");
 const prodRoute = require("./routes/prodRoute");
+
+//Middleware
+app.use(bodyParser.json({ type: "application/json" })).use(
+  cors({
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    allowedHeaders: [
+      "Access-Control-Allow-Origin",
+      "Content-Type",
+      "x-access-token",
+    ],
+  })
+);
+
+app.use(methodOverride("_method"));
 
 const port = process.env.PORT || 5000;
 // const mongoose = require("mongoose");
@@ -15,34 +35,35 @@ app.listen(port, () =>
   console.log(`Server listening at http://localhost: ${port}`)
 );
 
-const dbPath =
+// const dbPath =
+//   "mongodb+srv://dbUser:nCRo9dSrxTl3rBfg@cluster0-frk7s.mongodb.net/tyrestore_dev?retryWrites=true&w=majority";
+// mongoose.connect(dbPath, {
+//   useNewUrlParser: true,
+// });
+
+const mongoURI =
   "mongodb+srv://dbUser:nCRo9dSrxTl3rBfg@cluster0-frk7s.mongodb.net/tyrestore_dev?retryWrites=true&w=majority";
-mongoose.connect(dbPath, {
-  useNewUrlParser: true
+const conn = mongoose.createConnection(mongoURI);
+
+//Init gfs
+let gfs;
+
+// const db = mongoose.connection;
+conn.on("error", () => {
+  console.log("> !!!error occurred from the database");
 });
-const db = mongoose.connection;
-db.on("error", () => {
-  console.log("> error occurred from the database");
-});
-db.once("open", () => {
-  console.log("> successfully opened the database");
+// conn.once("open", () => {
+//   console.log("> !successfully opened the database");
+// });
+conn.once("open", () => {
+  console.log("> !successfully opened the database");
+  gfs = Grid(conn.db, mongoose.mongo);
 });
 
 // create a GET route
 app.get("/express_backend", (req, res) => {
   res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
 });
-
-app.use(bodyParser.json({ type: "application/json" })).use(
-  cors({
-    methods: ["POST", "GET", "PUT", "DELETE"],
-    allowedHeaders: [
-      "Access-Control-Allow-Origin",
-      "Content-Type",
-      "x-access-token"
-    ]
-  })
-);
 
 // Line 1 and 2 is requiring Express and allows us to use it inside of our server.js file.
 // Line 3 is setting the port that our Express server will be running on.
@@ -51,3 +72,7 @@ app.use(bodyParser.json({ type: "application/json" })).use(
 // Apply middleware
 app.use("/posts", postRoute);
 app.use("/prods", prodRoute);
+
+app.get("/i", (req, res) => {
+  res.sender("index");
+});
