@@ -15,18 +15,18 @@ import Footer from "./components/Footer/Footer";
 class App extends Component {
   state = {
     data: null,
-    noteData: null
+    noteData: null,
   };
 
   componentDidMount() {
     // Call our fetch function below once the component mounts
     this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
-      .catch(err => console.log(err));
+      .then((res) => this.setState({ data: res.express }))
+      .catch((err) => console.log(err));
 
     this.callNote()
-      .then(res => this.setState({ noteData: res[0].prod_brand }))
-      .catch(err => console.log(err));
+      .then((res) => this.setState({ noteData: res[0].prod_brand }))
+      .catch((err) => console.log(err));
   }
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
@@ -82,6 +82,26 @@ class App extends Component {
         <p className="App-intro">{this.state.data}</p>
         <h1>Get Data from MongoDB?</h1>
         <p className="App-intro">{this.state.noteData}</p>
+        <div>
+          <form action="/upload" method="POST" encType="multipart/form-data">
+            <div className="custom-file mb-3">
+              <input
+                type="file"
+                name="file"
+                id="file"
+                className="custom-file-input"
+              />
+              <label for="title" class="custom-file-label">
+                Choose File
+              </label>
+            </div>
+            <input
+              type="submit"
+              value="Submit"
+              className="btn btn-primary btn-block"
+            />
+          </form>
+        </div>
       </div>
     );
   }
