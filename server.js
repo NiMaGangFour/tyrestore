@@ -55,7 +55,6 @@ conn.on("error", () => {
 //   console.log("> !successfully opened the database");
 // });
 conn.once("open", () => {
-  //Init steam
   console.log("> !successfully opened the database");
   //Init stream
   gfs = Grid(conn.db, mongoose.mongo);
@@ -84,9 +83,26 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 //@route GET /
-//@desc Loads form
-app.get("/i", (req, res) => {
-  res.sender("index");
+
+app.get("/", (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    //Check if files
+    if (!files || files.length === 0) {
+      res.render("index", { files: false });
+    } else {
+      files.map((file) => {
+        if (
+          file.contentType === "image/jpeg" ||
+          file.contentType === "image/png"
+        ) {
+          file.isImage = true;
+        } else {
+          file.isImage = false;
+        }
+      });
+      res.render("index", { files: files });
+    }
+  });
 });
 
 //@route POST /upload
@@ -109,6 +125,29 @@ app.get("/files", (req, res) => {
 
     //Files exist
     return res.json(files);
+  });
+});
+
+app.get("/images", (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    //Check if files
+    if (!files || files.length === 0) {
+      return res.status(404).json({
+        err: "No file exist",
+      });
+    } else {
+      files.map((file) => {
+        if (
+          file.contentType === "image/jpeg" ||
+          file.contentType === "image/png"
+        ) {
+          file.isImage = true;
+        } else {
+          file.isImage = false;
+        }
+      });
+      return res.json(files);
+    }
   });
 });
 
@@ -140,9 +179,13 @@ app.get("/image/:filename", (req, res) => {
     //Check if image
     if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
       //Read output to browser
+      const readstream = gfs.createReadStream(file.filename);
+      readstream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: "Not an image",
+      });
     }
-    //Files exist
-    return res.json(file);
   });
 });
 
