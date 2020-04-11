@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import { FaShippingFast } from "react-icons/fa";
 import { IoIosCheckmarkCircleOutline, IoIosHeartEmpty } from "react-icons/io";
 

@@ -11,7 +11,7 @@ import FAQ from "./components/Pages/FAQ";
 import News from "./components/Pages/News";
 import Tyres from "./components/Pages/Tyres";
 import Footer from "./components/Footer/Footer";
-import { Card } from "react-bootstrap";
+import UIProUploadForm from "./components/UI/UIProUploadForm";
 
 class App extends Component {
   state = {
@@ -35,6 +35,38 @@ class App extends Component {
       .then((res) => this.setState({ images: res }))
       .catch((err) => console.log(err));
   }
+
+  postProductText = () => {
+    console.log("postProductText");
+    // Simple POST request with a JSON body using fetch
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prod_brand: "DaJB",
+        prod_name: "testing",
+        prod_price: "testing",
+        prod_info: "testing",
+        prod_details: "testing",
+        prod_status: "Available",
+      }),
+    };
+    fetch("/prods", requestOptions)
+      .then(async (response) => {
+        const data = await response.json();
+
+        // check for error response
+        if (!response.ok) {
+          // get error message from body or default to response status
+          const error = (data && data.message) || response.status;
+          return Promise.reject(error);
+        }
+        // this.setState({ postId: data.id });
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  };
 
   callImages = async () => {
     const response = await fetch("/images");
@@ -101,26 +133,7 @@ class App extends Component {
         <h1>Get Data from MongoDB?</h1>
         <p className="App-intro">{this.state.noteData}</p>
         <div>
-          <form action="/upload" method="POST" encType="multipart/form-data">
-            <div className="custom-file mb-3">
-              <input
-                type="file"
-                name="file"
-                id="file"
-                className="custom-file-input"
-              />
-              <label for="title" class="custom-file-label">
-                Choose File
-              </label>
-            </div>
-            <input
-              type="submit"
-              value="Submit"
-              className="btn btn-primary btn-block"
-            />
-          </form>
-          <hr />
-          <img src="/image/0248538faeeefd074838d74d23787c12.png" alt="" />
+          <UIProUploadForm upload={() => this.postProductText()} />
         </div>
       </div>
     );
