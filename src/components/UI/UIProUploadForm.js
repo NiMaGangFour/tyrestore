@@ -1,7 +1,32 @@
 import React, { Component } from "react";
+
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
+
 import "./UIProList.scss";
 
 class UIProUploadForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: "" };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("nextProps" + nextProps.productInfo);
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+    console.log(this.state);
+  }
+
+  setProduct() {
+    const product = this.state.value;
+    console.log("setProduct" + product);
+
+    this.props.onSetProduct(product);
+  }
+
   render() {
     console.log(this.props);
 
@@ -80,7 +105,13 @@ class UIProUploadForm extends Component {
           <div className="form-row">
             <div className="form-group col-md-6">
               <label for="productName">Product Name</label>
-              <input type="text" className="form-control" id="productName" />
+              <input
+                type="text"
+                className="form-control"
+                id="productName"
+                value={this.state.value}
+                onChange={(event) => this.handleChange(event)}
+              />
             </div>
             <div class="form-group col-md-6">
               <label for="productBrand">Product Brand</label>
@@ -122,7 +153,11 @@ class UIProUploadForm extends Component {
             className="btn btn-primary btn-block"
           />
         </form>
-        <button className="btn-primary" onClick={() => this.props.upload()}>
+        <button
+          className="btn-primary"
+          //   onClick={() => this.props.onAddProduct()}
+          onClick={() => this.setProduct()}
+        >
           updload
         </button>
       </div>
@@ -130,4 +165,21 @@ class UIProUploadForm extends Component {
   }
 }
 
-export default UIProUploadForm;
+const mapStateToProps = (state) => {
+  return {
+    productName: state.product.productName,
+    productInfo: state.product.productInfo,
+    // ings: state.burgerBuilder.ingredients,
+    // price: state.burgerBuilder.totalPrice,
+    // error: state.burgerBuilder.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddProduct: () => dispatch(actions.addProduct()),
+    onSetProduct: (productInfo) => dispatch(actions.setProduct(productInfo)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UIProUploadForm);
