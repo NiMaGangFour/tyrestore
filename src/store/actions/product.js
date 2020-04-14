@@ -15,7 +15,6 @@ export const uploadProductFormStart = () => {
 export const uploadProductFormSuccess = (productForm) => {
   return {
     type: actionTypes.UPLOAD_PRODUCT_FORM_SUCCESS,
-
     productForm: productForm,
   };
 };
@@ -52,10 +51,10 @@ export const setProduct = (productForm) => {
         const data = await response.json();
         console.log(productForm);
         console.log(response);
-
+        dispatch(uploadProductFormSuccess(productForm));
         // check for error response
         if (!response.ok) {
-          dispatch(uploadProductFormSuccess(response.data));
+          dispatch(uploadProductFormStartFail(response.status));
           // get error message from body or default to response status
           const error = (data && data.message) || response.status;
           return Promise.reject(error);
@@ -63,7 +62,7 @@ export const setProduct = (productForm) => {
         // this.setState({ postId: data.id });
       })
       .catch((error) => {
-        dispatch(uploadProductFormStartFail(error));
+        console.error("There was an error!", error);
       });
     // .then((response) => {
     //   console.log(productForm);
