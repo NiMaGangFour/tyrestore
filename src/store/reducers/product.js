@@ -1,8 +1,11 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
+  loading: false,
+  uploaded: false,
+  productForm: null,
+
   productName: null,
-  productInfo: null,
   // product: null,
   // totalPrice: 4,
   // error: false,
@@ -32,7 +35,24 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_PRODUCT:
       return {
         ...state,
-        productInfo: action.productInfo,
+        productForm: action.productForm,
+      };
+    case actionTypes.UPLOAD_PRODUCT_FORM_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionTypes.UPLOAD_PRODUCT_FORM_SUCCESS:
+      return {
+        ...state,
+        uploaded: true,
+        loading: false,
+        productForm: action.productForm,
+      };
+    case actionTypes.UPLOAD_PRODUCT_FORM_FAIL:
+      return {
+        ...state,
+        loading: false,
       };
 
     default:

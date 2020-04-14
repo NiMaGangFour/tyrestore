@@ -8,23 +8,52 @@ import "./UIProList.scss";
 class UIProUploadForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
+    this.state = {
+      productName: "",
+      productBrand: "",
+      productPrice: "",
+      productStatus: "Available",
+      productInformation: "",
+      productDetails: "",
+    };
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("nextProps" + nextProps.productInfo);
+    console.log("nextProps is : " + nextProps.productForm);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-    console.log(this.state);
+  handleChangeProductName(event) {
+    this.setState({ productName: event.target.value });
+  }
+  handleChangeProductBrand(event) {
+    this.setState({ productBrand: event.target.value });
+  }
+  handleChangeProductPrice(event) {
+    this.setState({ productPrice: event.target.value });
+  }
+  handleChangeProductStatus(event) {
+    this.setState({ productStatus: event.target.value });
+  }
+  handleChangeProductInformation(event) {
+    this.setState({ productInformation: event.target.value });
+  }
+  handleChangeProductDetails(event) {
+    this.setState({ productDetails: event.target.value });
   }
 
   setProduct() {
-    const product = this.state.value;
-    console.log("setProduct" + product);
+    const productForm = {
+      ...this.state,
+      productName: this.state.productName,
+      productBrand: this.state.productBrand,
+      productPrice: this.state.productPrice,
+      productStatus: this.state.productStatus,
+      productInformation: this.state.productInformation,
+      productDetails: this.state.productDetails,
+    };
 
-    this.props.onSetProduct(product);
+    console.log("setProduct" + productForm);
+    this.props.onSetProduct(productForm);
   }
 
   render() {
@@ -109,23 +138,41 @@ class UIProUploadForm extends Component {
                 type="text"
                 className="form-control"
                 id="productName"
-                value={this.state.value}
-                onChange={(event) => this.handleChange(event)}
+                value={this.state.productName}
+                onChange={(event) => this.handleChangeProductName(event)}
               />
             </div>
             <div class="form-group col-md-6">
               <label for="productBrand">Product Brand</label>
-              <input type="text" className="form-control" id="productBrand" />
+              <input
+                type="text"
+                className="form-control"
+                id="productBrand"
+                value={this.state.productBrand}
+                onChange={(event) => this.handleChangeProductBrand(event)}
+              />
             </div>
             <div className="form-group col-md-6">
               <label for="productPrice">Product Price</label>
-              <input type="text" className="form-control" id="productPrice" />
+              <input
+                type="text"
+                className="form-control"
+                id="productPrice"
+                value={this.state.productPrice}
+                onChange={(event) => this.handleChangeProductPrice(event)}
+              />
             </div>
             <div className="form-group col-md-6">
               <label for="Status">Status</label>
-              <select id="Status" className="form-control">
-                <option selected>Available</option>
-                <option>Sold Out</option>
+              <select
+                id="Status"
+                className="form-control"
+                onChange={(event) => this.handleChangeProductStatus(event)}
+              >
+                <option selected value="Available">
+                  Available
+                </option>
+                <option value="Sold Out">Sold Out</option>
               </select>
             </div>
           </div>
@@ -136,6 +183,8 @@ class UIProUploadForm extends Component {
               className="form-control"
               id="productInformation"
               placeholder="e.g. Product Information"
+              value={this.state.productInformation}
+              onChange={(event) => this.handleChangeProductInformation(event)}
             />
           </div>
           <div class="form-group">
@@ -145,6 +194,8 @@ class UIProUploadForm extends Component {
               className="form-control"
               id="productDetails"
               placeholder="e.g. 224 35 R17"
+              value={this.state.productDetails}
+              onChange={(event) => this.handleChangeProductDetails(event)}
             />
           </div>
           <input
@@ -168,7 +219,7 @@ class UIProUploadForm extends Component {
 const mapStateToProps = (state) => {
   return {
     productName: state.product.productName,
-    productInfo: state.product.productInfo,
+    productForm: state.product.productForm,
     // ings: state.burgerBuilder.ingredients,
     // price: state.burgerBuilder.totalPrice,
     // error: state.burgerBuilder.error,
@@ -178,7 +229,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddProduct: () => dispatch(actions.addProduct()),
-    onSetProduct: (productInfo) => dispatch(actions.setProduct(productInfo)),
+    onSetProduct: (productForm) => dispatch(actions.setProduct(productForm)),
   };
 };
 
