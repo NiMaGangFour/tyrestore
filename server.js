@@ -34,8 +34,10 @@ app.listen(port, () =>
 );
 
 // Mongo URI
+//mongodb+srv://dbUser:<password>@cluster0-frk7s.mongodb.net/test?retryWrites=true&w=majority
 const mongoURI =
   "mongodb+srv://dbUser:nCRo9dSrxTl3rBfg@cluster0-frk7s.mongodb.net/tyrestore_dev?retryWrites=true&w=majority";
+
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
 });
@@ -48,6 +50,7 @@ mongoose.connect(mongoURI, {
 let gfs;
 
 const conn = mongoose.connection;
+
 conn.on("error", () => {
   console.log("> !!!error occurred from the database");
 });
@@ -61,59 +64,61 @@ conn.once("open", () => {
   gfs.collection("uploads");
 });
 
-//create storage engine
-const storage = new GridFsStorage({
-  url: mongoURI,
-  file: (req, file) => {
-    return new Promise((resolve, reject) => {
-      crypto.randomBytes(16, (err, buf) => {
-        if (err) {
-          return reject(err);
-        }
-        const filename = buf.toString("hex") + path.extname(file.originalname);
-        const fileInfo = {
-          filename: filename,
-          bucketName: "uploads",
-        };
-        resolve(fileInfo);
-      });
-    });
-  },
+// //create storage engine
+// const storage = new GridFsStorage({
+//   url: mongoURI,
+//   file: (req, file) => {
+//     return new Promise((resolve, reject) => {
+//       crypto.randomBytes(16, (err, buf) => {
+//         if (err) {
+//           return reject(err);
+//         }
+//         const filename = buf.toString("hex") + path.extname(file.originalname);
+//         const fileInfo = {
+//           filename: filename,
+//           bucketName: "uploads",
+//         };
+//         resolve(fileInfo);
+//       });
+//     });
+//   },
+// });
+// const upload = multer({ storage });
+
+// //@route POST /upload
+// //@desc uploads file to DB
+// app.post("/upload", upload.single("file"), (req, res) => {
+//   //Check if files
+//   if (!req.file || req.file.length === 0) {
+//     return res.status(404).json({
+//       err: "No file exist",
+//     });
+//   }
+//   console.log(req.file);
+//   // console.log(res);
+//   // res.send("<p>some html</p>");
+//   // res.send(req.file);
+//   // res.status(204).send(res.file);
+//   res.json({ file: req.file });
+// });
+
+//@route POST
+app.post("/test", (req, res) => {
+  res.send({ ex: "POST request to the homepage" });
 });
-const upload = multer({ storage });
 
-//@route GET /
-
-app.get("/", (req, res) => {
-  gfs.files.find().toArray((err, files) => {
-    //Check if files
-    if (!files || files.length === 0) {
-      res.render("index", { files: false });
-    } else {
-      files.map((file) => {
-        if (
-          file.contentType === "image/jpeg" ||
-          file.contentType === "image/png"
-        ) {
-          file.isImage = true;
-        } else {
-          file.isImage = false;
-        }
-      });
-      res.render("index", { files: files });
-    }
-  });
+// create a GET route
+app.get("/express_backend", (req, res) => {
+  res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
 });
 
-//@route POST /upload
-//@desc uploads file to DB
-app.post("/upload", upload.single("file"), (req, res) => {
-  res.json({ file: req.file });
-  // res.redirect("/");
+// create a GET route
+app.post("/express_backend", (req, res) => {
+  res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
 });
 
 //@route GET / files
-//@desc Display all files in JSON
+//@desc Display all files in JSON (inlcude no image files)
 app.get("/files", (req, res) => {
   gfs.files.find().toArray((err, files) => {
     //Check if files
@@ -128,6 +133,8 @@ app.get("/files", (req, res) => {
   });
 });
 
+//@desc list all file
+//@desc Display all image files in JSON
 app.get("/images", (req, res) => {
   gfs.files.find().toArray((err, files) => {
     //Check if files
@@ -189,11 +196,6 @@ app.get("/image/:filename", (req, res) => {
   });
 });
 
-// create a GET route
-app.get("/express_backend", (req, res) => {
-  res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
-});
-
 // Line 1 and 2 is requiring Express and allows us to use it inside of our server.js file.
 // Line 3 is setting the port that our Express server will be running on.
 // Line 6 will simply console.log a message that will let us know our server is up and running.
@@ -202,6 +204,8 @@ app.get("/express_backend", (req, res) => {
 
 const postRoute = require("./routes/postRoute");
 const prodRoute = require("./routes/prodRoute");
+const prodImgRoute = require("./routes/prodImgRoute");
 
 app.use("/posts", postRoute);
 app.use("/prods", prodRoute);
+app.use("/upload", prodImgRoute);

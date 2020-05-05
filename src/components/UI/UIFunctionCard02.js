@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 
-import {
-  Card,
-  Button,
-  Row,
-  Col,
-  Form,
-  ListGroup,
-  ListGroupItem
-} from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 
 import "./UICards.scss";
 

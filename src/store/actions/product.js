@@ -1,10 +1,10 @@
 import * as actionTypes from "./actionTypes";
 
-export const addProduct = () => {
-  return {
-    type: actionTypes.ADD_PRODUCT,
-  };
-};
+// export const addProduct = () => {
+//   return {
+//     type: actionTypes.ADD_PRODUCT,
+//   };
+// };
 
 export const uploadProductFormStart = () => {
   return {
@@ -27,10 +27,6 @@ export const uploadProductFormStartFail = (error) => {
 };
 
 export const setProduct = (productForm) => {
-  // return {
-  //   type: actionTypes.SET_PRODUCT,
-  //   productForm: productForm,
-  // };
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -64,16 +60,6 @@ export const setProduct = (productForm) => {
       .catch((error) => {
         console.error("There was an error!", error);
       });
-    // .then((response) => {
-    //   console.log(productForm);
-    //   console.log(response.json());
-
-    //   dispatch(uploadProductFormSuccess(response.data));
-    //   // this.props.history.push("/");
-    // })
-    // .catch((error) => {
-    //   dispatch(uploadProductFormStartFail(error));
-    // });
   };
 };
 

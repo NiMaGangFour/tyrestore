@@ -1,16 +1,5 @@
 import React, { Component } from "react";
-import {
-  Nav,
-  Row,
-  Col,
-  ListGroup,
-  Form,
-  FormControl,
-  Button,
-  Card
-} from "react-bootstrap";
-
-import { FaShippingFast } from "react-icons/fa";
+import { ListGroup } from "react-bootstrap";
 
 class UIList extends Component {
   render() {
@@ -36,7 +25,7 @@ class UIList extends Component {
               style={{
                 fontSize: "15px",
                 textTransform: "uppercase",
-                fontWeight: "600"
+                fontWeight: "600",
               }}
             >
               {this.props.list_title}

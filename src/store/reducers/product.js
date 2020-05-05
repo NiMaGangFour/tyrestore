@@ -4,11 +4,6 @@ const initialState = {
   loading: false,
   uploaded: false,
   productForm: null,
-
-  productName: null,
-  // product: null,
-  // totalPrice: 4,
-  // error: false,
 };
 
 const INGREDIENT_PRICES = {
@@ -53,6 +48,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        uploaded: false,
       };
 
     default:
