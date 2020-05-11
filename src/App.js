@@ -145,8 +145,6 @@ class App extends Component {
         {/* // Render the newly fetched data inside of this.state.data  */}
         <h1>Express works?</h1>
         <p className="App-intro">{this.state.data}</p>
-        <h1>API /post works?</h1>
-        <p className="App-intro">{this.state.data2}</p>
         <h1>Get Data from MongoDB?</h1>
         <p className="App-intro">{this.state.noteData}</p>
         <div>

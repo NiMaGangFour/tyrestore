@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
-import axios, { post } from "axios";
+import axios from "axios";
+
+// import { ListGroup } from "react-bootstrap";
 
 import "./UIProList.scss";
+import * as actions from "../../store/actions/index";
 
 class UIProUploadForm extends Component {
   constructor(props) {
@@ -17,27 +19,31 @@ class UIProUploadForm extends Component {
       productStatus: "Available",
       productInformation: "",
       productDetails: "",
+      imgInfo: {
+        imgUploaded: false,
+        imgId: "",
+        imgOriginalName: "",
+        imgFilename: "",
+        imgBucketName: "",
+        imgUploadDate: "",
+      },
+      imgPreview: false,
+      imgSrcPreview: null,
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("nextProps is : " + nextProps.productForm);
+    console.log("nextProps.productForm : " + nextProps.productForm);
+    console.log("nextProps.imageData : " + nextProps.imageData);
+    console.log("nextProps : " + nextProps);
   }
 
+  // changeHandler: Product Details
   changeHandler(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  changeImgHandler(event) {
-    this.setState({ file: event.target.value });
-  }
-
-  async onSubmitImgHandler() {
-    const res = await axios.post("/upload");
-    console.warn("get response", res);
-    // this.setState({ response: res.data });
-  }
-
+  // Method: Upload Product Details
   uploadProduct() {
     const productForm = {
       productName: this.state.productName,
@@ -48,77 +54,193 @@ class UIProUploadForm extends Component {
       productDetails: this.state.productDetails,
     };
 
-    console.log("setProduct" + productForm);
+    console.log("uploadProduct() ===>productForm:" + productForm);
     this.props.onSetProduct(productForm);
   }
 
+  // changeHandler: Product's Image
   onChangeImgHandler = (event) => {
     console.log(event.target.files[0]);
-    this.setState({
-      selectedFile: event.target.files[0],
-      loaded: 0,
-    });
-    // let files = event.target.files;
-    // let reader = new FileReader();
-    // reader.readAsDataURL(files[0]);
 
-    // reader.onload = (event) => {
-    //   console.warn("data file", event.target.result);
-    //   const formData = { file: event.target.result };
-    //   return post("/upload", formData).then((response) =>
-    //     console.warn("result", response)
-    //   );
-    // };
-  };
+    // var file2 = event.target.files[0];
 
-  onClickHandler = () => {
-    const data = new FormData();
-    data.append("file", this.state.selectedFile);
-    axios
-      .post("/upload", data, {
-        // receive two parameter endpoint url ,form data
-      })
-      .then((res) => {
-        // then print response status
-        console.log(res.statusText);
-        console.log(res);
+    // console.log("file :" + file);
+    // console.log("file2 :" + file2);
+    // console.log(reader);
+    // console.log(url);
+
+    //Method: Image Preview
+    var file = event.target.files[0];
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      this.setState({
+        imgSrcPreview: [reader.result],
+        selectedFile: file,
+        imgPreview: true,
       });
+      console.log(this.state.imgSrcPreview);
+    };
+    // reader.readAsDataURL(file);
+
+    // this.setState({
+    //   selectedFile: event.target.files[0],
+    //   //   loaded: 0,
+    // });
+    // console.log(event.target.files[0]);
   };
+
+  // Method: Upload Product‘s Image
+  uploadProductImg() {
+    const selectedFile = this.state.selectedFile;
+    console.log("uploadProductImg() ===>ImgInfo:" + selectedFile);
+    this.props.onSetProductImg(selectedFile);
+  }
+
+  //   imgUploadHandler = () => {
+  //     const data = new FormData();
+  //     data.append("file", this.state.selectedFile);
+  //     axios
+  //       .post("/upload", data, {
+  //         // receive two parameter endpoint url ,form data
+  //       })
+  //       .then((res) => {
+  //         // then print response status
+  //         console.log(res.statusText);
+  //         console.log(res.data);
+  //         console.log(res);
+  //         this.setState({
+  //           imgUploaded: true,
+  //           imgId: res.data.id,
+  //           imgOriginalName: res.data.originalname,
+  //           imgFilename: res.data.filename,
+  //           imgBucketName: res.data.bucketName,
+  //           imgUploadDate: res.data.uploadDate,
+  //         });
+  //       });
+  //   };
 
   render() {
     console.log(this.props);
 
     return (
       <div>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              {/* <div className="card" style={{ width: "18rem" }}> */}
+              {this.props.uploaded ? (
+                <div className="card">
+                  <div className="card-body">
+                    <h5 className="card-title">Product Image Details</h5>
+                    <h5 className="card-text">{this.state.imgOriginalName}</h5>
+                  </div>
+                  <ul class="list-group" style={{ textAlign: "left" }}>
+                    <li class="list-group-item">
+                      Image id [MongoDB item id]:{this.props.imageData.id}
+                    </li>
+                    <li class="list-group-item">
+                      Image Originalname: {this.props.imageData.originalname}
+                    </li>
+                    <li class="list-group-item">
+                      Image Filename: {this.props.imageData.filename}
+                    </li>
+                    <li class="list-group-item">
+                      Bucket Name:{this.props.imageData.bucketName}
+                    </li>
+                    <li class="list-group-item">
+                      Image Upload Date: {this.props.imageData.uploadDate}
+                    </li>
+                  </ul>
+                  <div className="card-body">
+                    {/* <a href="" className="card-link">
+                      Card link
+                    </a>
+                    <a href="#" className="card-link">
+                      Another link
+                    </a> */}
+                  </div>
+                </div>
+              ) : (
+                <div className="card">
+                  <div className="card-body">
+                    <h5 className="card-title ">No Image</h5>
+                    <h5 className="card-text">{this.state.imgOriginalName}</h5>
+                  </div>
+                  <ul class="list-group" style={{ textAlign: "left" }}>
+                    <li class="list-group-item">No Image Can't be detected!</li>
+                    <li class="list-group-item">Image Originalname: N/A </li>
+                    <li class="list-group-item">Image Filename: N/A</li>
+                    <li class="list-group-item">Bucket Name: N/A</li>
+                    <li class="list-group-item">Image Upload Date: N/A</li>
+                  </ul>
+                  <div className="card-body">
+                    {/* <a href="#" className="card-link">
+                      Card link
+                    </a>
+                    <a href="#" className="card-link">
+                      Another link
+                    </a> */}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="col-sm">
+              <div className="form-group">
+                {/* <label for="exampleFormControlFile1">Example file input</label> */}
+                <input
+                  ref="file"
+                  type="file"
+                  className="form-control-file"
+                  id="file"
+                  onChange={(event) => this.onChangeImgHandler(event)}
+                />
+                <div class="card text-white bg-warning mb-3">
+                  <h4>Image Preview</h4>
+                  {this.state.imgPreview ? (
+                    <img
+                      className="card-img-top"
+                      style={{ width: "20%" }}
+                      src={this.state.imgSrcPreview}
+                      alt="ProImgPreview"
+                    />
+                  ) : null}
+                </div>
+                {/* <img src="..." className="card-img-top" alt="..." /> */}
+                {this.props.uploaded ? (
+                  <img
+                    className="card-img-top"
+                    style={{ width: "20%" }}
+                    src={this.props.imageSrc}
+                    alt="ProductImage"
+                  />
+                ) : null}
+                <button
+                  className="btn btn-primary btn-block"
+                  onClick={() => this.uploadProductImg()}
+                >
+                  Upload Image
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* <hr />
         <img
           style={{ width: "20%" }}
           src="/image/0248538faeeefd074838d74d23787c12.png"
           alt=""
+          
         /> */}
+        <h2>Production Text Form</h2>
 
+        <hr />
+
+        <h2>Production Form</h2>
+        {/* <form action="/upload" method="POST" encType="multipart/form-data"> */}
         <form action="/upload" method="POST" encType="multipart/form-data">
-          {/* <form
-          onSubmit={this.onSubmitImgHandler}
-          methid="POST"
-          encType="multipart/form-data"
-        > */}
-          <hr />
-          <h2>Production Image Update</h2>
-          <div className="custom-file mb-3">
-            {/* <input
-              value={this.state.file}
-              // onChange={(event) => this.handleChangeProductName(event)}
-              type="file"
-              name="file"
-              id="file"
-              className="custom-file-input"
-            /> */}
-            <label for="title" class="custom-file-label">
-              Choose File
-            </label>
-          </div>
-          <h2>Production Text Form</h2>
           <div className="form-row">
             <div className="form-group col-md-6">
               <label for="productName">Product Name</label>
@@ -199,39 +321,16 @@ class UIProUploadForm extends Component {
             />
           </div>
 
-          <input
-            type="submit"
-            value="Submit"
-            className="btn btn-primary btn-block"
-          />
+          <input type="submit" value="Submit" className="" />
         </form>
+        <hr />
 
         <button
-          className="btn-primary"
-          //   onClick={() => this.props.onAddProduct()}
+          className="btn btn-primary btn-block"
           onClick={() => this.uploadProduct()}
         >
-          uploadProduct
+          uploadProduct Information
         </button>
-        {/* <button
-          className="btn-danger"
-          //   onClick={() => this.props.onAddProduct()}
-          onClick={() => this.uploadProductImg()}
-        >
-          updload
-        </button> */}
-
-        <div>
-          <h1>React js File Updload Toturial</h1>
-          <input
-            type="file"
-            name="file"
-            onChange={(event) => this.onChangeImgHandler(event)}
-          />
-          <button className="btn-danger" onClick={() => this.onClickHandler()}>
-            Upload
-          </button>
-        </div>
       </div>
     );
   }
@@ -240,6 +339,10 @@ class UIProUploadForm extends Component {
 const mapStateToProps = (state) => {
   return {
     productForm: state.product.productForm,
+    imageData: state.product.imageData,
+    imageSrc: state.product.imageSrc,
+    loading: state.product.loading,
+    uploaded: state.product.uploaded,
     // ings: state.burgerBuilder.ingredients,
     // price: state.burgerBuilder.totalPrice,
     // error: state.burgerBuilder.error,
@@ -250,6 +353,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // onAddProduct: () => dispatch(actions.addProduct()),
     onSetProduct: (productForm) => dispatch(actions.setProduct(productForm)),
+    onSetProductImg: (selectedFile) =>
+      dispatch(actions.setProductImg(selectedFile)),
   };
 };
 

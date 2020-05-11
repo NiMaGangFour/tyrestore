@@ -1,1 +1,1 @@
-export { setProduct } from "./product";
+export { setProduct, setProductImg } from "./product";
