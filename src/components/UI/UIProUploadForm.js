@@ -70,18 +70,21 @@ class UIProUploadForm extends Component {
     // console.log(url);
 
     //Method: Image Preview
-    var file = event.target.files[0];
+    if (event.target.files[0]) {
+      var file = event.target.files[0];
 
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      this.setState({
-        imgSrcPreview: [reader.result],
-        selectedFile: file,
-        imgPreview: true,
-      });
-      console.log(this.state.imgSrcPreview);
-    };
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        this.setState({
+          imgSrcPreview: [reader.result],
+          selectedFile: file,
+          imgPreview: true,
+        });
+        console.log(this.state.imgSrcPreview);
+      };
+    }
+
     // reader.readAsDataURL(file);
 
     // this.setState({
@@ -189,7 +192,27 @@ class UIProUploadForm extends Component {
 
             <div className="col-sm">
               <div className="form-group">
-                {/* <label for="exampleFormControlFile1">Example file input</label> */}
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">
+                      Upload
+                    </span>
+                  </div>
+                  <div class="custom-file">
+                    <input
+                      ref="file"
+                      type="file"
+                      className="custom-file-input"
+                      id="file"
+                      onChange={(event) => this.onChangeImgHandler(event)}
+                      class="custom-file-input"
+                      aria-describedby="inputGroupFileAddon01"
+                    />
+                    <label class="custom-file-label" for="file">
+                      Choose file
+                    </label>
+                  </div>
+                </div>
                 <input
                   ref="file"
                   type="file"
@@ -197,17 +220,28 @@ class UIProUploadForm extends Component {
                   id="file"
                   onChange={(event) => this.onChangeImgHandler(event)}
                 />
-                <div class="card text-white bg-warning mb-3">
-                  <h4>Image Preview</h4>
-                  {this.state.imgPreview ? (
-                    <img
-                      className="card-img-top"
-                      style={{ width: "20%" }}
-                      src={this.state.imgSrcPreview}
-                      alt="ProImgPreview"
-                    />
-                  ) : null}
-                </div>
+                {this.state.imgPreview ? (
+                  // <h4>Image Preview</h4>
+                  // <img
+                  //   className="card-img-top"
+                  //   style={{ width: "20%" }}
+                  //   src={this.state.imgSrcPreview}
+                  //   alt="ProImgPreview"
+                  // />
+
+                  <div className="card text-center border-warning">
+                    <div className="card-body">
+                      <h4>Image Preview</h4>
+                      <img
+                        className="card-img-top"
+                        style={{ width: "20%" }}
+                        src={this.state.imgSrcPreview}
+                        alt="ProImgPreview"
+                      />
+                    </div>
+                  </div>
+                ) : null}
+
                 {/* <img src="..." className="card-img-top" alt="..." /> */}
                 {this.props.uploaded ? (
                   <img
