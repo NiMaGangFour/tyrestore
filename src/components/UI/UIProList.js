@@ -8,7 +8,7 @@ const UIProList = ({ posts, loading }) => {
   }
   return (
     <div>
-      {posts.map(post => (
+      {posts.map((post) => (
         <Col key={post.id} xs={2} lg="3" className="col-card">
           <Card className="prod-card">
             {/* <Card.Img variant="top" src={post.thumbnailUrl} /> */}

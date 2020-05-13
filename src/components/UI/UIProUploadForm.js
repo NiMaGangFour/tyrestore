@@ -7,6 +7,7 @@ import axios from "axios";
 
 import "./UIProList.scss";
 import * as actions from "../../store/actions/index";
+import UIProConfirmation from "./UIProConfirmation";
 
 class UIProUploadForm extends Component {
   constructor(props) {
@@ -19,23 +20,24 @@ class UIProUploadForm extends Component {
       productStatus: "Available",
       productInformation: "",
       productDetails: "",
-      imgInfo: {
-        imgUploaded: false,
-        imgId: "",
-        imgOriginalName: "",
-        imgFilename: "",
-        imgBucketName: "",
-        imgUploadDate: "",
-      },
       imgPreview: false,
       imgSrcPreview: null,
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("nextProps.productForm : " + nextProps.productForm);
-    console.log("nextProps.imageData : " + nextProps.imageData);
-    console.log("nextProps : " + nextProps);
+    // console.log("nextProps.productForm : " + nextProps.productForm);
+    // console.log("nextProps.imageData : " + nextProps.imageData);
+    // console.log("nextProps : " + nextProps);
+    // console.log("this.props.uploaded : " + this.props.uploaded);
+    // console.log("nextProps.uploaded : " + nextProps.uploaded);
+    if (nextProps.uploaded) {
+      this.setState({
+        imgPreview: false,
+      });
+
+      console.log("imgPreview : " + this.state.imgPreview);
+    }
   }
 
   // changeHandler: Product Details
@@ -52,22 +54,18 @@ class UIProUploadForm extends Component {
       productStatus: this.state.productStatus,
       productInformation: this.state.productInformation,
       productDetails: this.state.productDetails,
+      productImageId: this.props.imageData.id,
     };
 
-    console.log("uploadProduct() ===>productForm:" + productForm);
+    console.log(
+      "uploadProduct() ===>productForm:" + productForm.productImageId
+    );
     this.props.onSetProduct(productForm);
   }
 
   // changeHandler: Product's Image
   onChangeImgHandler = (event) => {
-    console.log(event.target.files[0]);
-
-    // var file2 = event.target.files[0];
-
-    // console.log("file :" + file);
-    // console.log("file2 :" + file2);
-    // console.log(reader);
-    // console.log(url);
+    // console.log(event.target.files[0]);
 
     //Method: Image Preview
     if (event.target.files[0]) {
@@ -84,14 +82,6 @@ class UIProUploadForm extends Component {
         console.log(this.state.imgSrcPreview);
       };
     }
-
-    // reader.readAsDataURL(file);
-
-    // this.setState({
-    //   selectedFile: event.target.files[0],
-    //   //   loaded: 0,
-    // });
-    // console.log(event.target.files[0]);
   };
 
   // Method: Upload Product‘s Image
@@ -129,19 +119,20 @@ class UIProUploadForm extends Component {
 
     return (
       <div>
+        <h2>Product Editor </h2>
         <div className="container">
           <div className="row">
             <div className="col-sm">
               {/* <div className="card" style={{ width: "18rem" }}> */}
               {this.props.uploaded ? (
-                <div className="card">
+                <div className="card border-success mb-3">
                   <div className="card-body">
                     <h5 className="card-title">Product Image Details</h5>
                     <h5 className="card-text">{this.state.imgOriginalName}</h5>
                   </div>
                   <ul class="list-group" style={{ textAlign: "left" }}>
                     <li class="list-group-item">
-                      Image id [MongoDB item id]:{this.props.imageData.id}
+                      Image id [MongoDB id]:{this.props.imageData.id}
                     </li>
                     <li class="list-group-item">
                       Image Originalname: {this.props.imageData.originalname}
@@ -156,17 +147,9 @@ class UIProUploadForm extends Component {
                       Image Upload Date: {this.props.imageData.uploadDate}
                     </li>
                   </ul>
-                  <div className="card-body">
-                    {/* <a href="" className="card-link">
-                      Card link
-                    </a>
-                    <a href="#" className="card-link">
-                      Another link
-                    </a> */}
-                  </div>
                 </div>
               ) : (
-                <div className="card">
+                <div className="card border-warning">
                   <div className="card-body">
                     <h5 className="card-title ">No Image</h5>
                     <h5 className="card-text">{this.state.imgOriginalName}</h5>
@@ -178,14 +161,14 @@ class UIProUploadForm extends Component {
                     <li class="list-group-item">Bucket Name: N/A</li>
                     <li class="list-group-item">Image Upload Date: N/A</li>
                   </ul>
-                  <div className="card-body">
-                    {/* <a href="#" className="card-link">
+                  {/* <div className="card-body">
+                    <a href="#" className="card-link">
                       Card link
                     </a>
                     <a href="#" className="card-link">
                       Another link
-                    </a> */}
-                  </div>
+                    </a>
+                  </div> */}
                 </div>
               )}
             </div>
@@ -213,25 +196,17 @@ class UIProUploadForm extends Component {
                     </label>
                   </div>
                 </div>
-                <input
+                {/* <input
                   ref="file"
                   type="file"
                   className="form-control-file"
                   id="file"
                   onChange={(event) => this.onChangeImgHandler(event)}
-                />
+                /> */}
                 {this.state.imgPreview ? (
-                  // <h4>Image Preview</h4>
-                  // <img
-                  //   className="card-img-top"
-                  //   style={{ width: "20%" }}
-                  //   src={this.state.imgSrcPreview}
-                  //   alt="ProImgPreview"
-                  // />
-
-                  <div className="card text-center border-warning">
+                  <div className="card text-center border-warning mb-3">
                     <div className="card-body">
-                      <h4>Image Preview</h4>
+                      <h4 className="mb-3">Image Preview</h4>
                       <img
                         className="card-img-top"
                         style={{ width: "20%" }}
@@ -244,12 +219,17 @@ class UIProUploadForm extends Component {
 
                 {/* <img src="..." className="card-img-top" alt="..." /> */}
                 {this.props.uploaded ? (
-                  <img
-                    className="card-img-top"
-                    style={{ width: "20%" }}
-                    src={this.props.imageSrc}
-                    alt="ProductImage"
-                  />
+                  <div className="card text-center border-success mb-3">
+                    <div className="card-body">
+                      <h4 className="mb-3">Image aleady in MongoDB</h4>
+                      <img
+                        className="card-img-top"
+                        style={{ width: "20%" }}
+                        src={this.props.imageSrc}
+                        alt="ProductImage"
+                      />
+                    </div>
+                  </div>
                 ) : null}
                 <button
                   className="btn btn-primary btn-block"
@@ -261,110 +241,142 @@ class UIProUploadForm extends Component {
             </div>
           </div>
         </div>
-        {/* <hr />
-        <img
-          style={{ width: "20%" }}
-          src="/image/0248538faeeefd074838d74d23787c12.png"
-          alt=""
-          
-        /> */}
-        <h2>Production Text Form</h2>
 
         <hr />
 
-        <h2>Production Form</h2>
+        <h2>Product Form</h2>
         {/* <form action="/upload" method="POST" encType="multipart/form-data"> */}
-        <form action="/upload" method="POST" encType="multipart/form-data">
-          <div className="form-row">
-            <div className="form-group col-md-6">
-              <label for="productName">Product Name</label>
-              <input
-                name="productName"
-                type="text"
-                className="form-control"
-                id="productName"
-                value={this.state.productName}
-                onChange={(event) => this.changeHandler(event)}
-                // onChange={(event) => this.handleChangeProductName(event)}
-              />
-            </div>
-            <div class="form-group col-md-6">
-              <label for="productBrand">Product Brand</label>
-              <input
-                name="productBrand"
-                type="text"
-                className="form-control"
-                id="productBrand"
-                value={this.state.productBrand}
-                onChange={(event) => this.changeHandler(event)}
-                // onChange={(event) => this.handleChangeProductBrand(event)}
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label for="productPrice">Product Price</label>
-              <input
-                name="productPrice"
-                type="text"
-                className="form-control"
-                id="productPrice"
-                value={this.state.productPrice}
-                onChange={(event) => this.changeHandler(event)}
-                // onChange={(event) => this.handleChangeProductPrice(event)}
-              />
-            </div>
-            <div className="form-group col-md-6">
-              <label for="Status">Status</label>
-              <select
-                name="productStatus"
-                id="Status"
-                className="form-control"
-                onChange={(event) => this.changeHandler(event)}
-                // onChange={(event) => this.handleChangeProductStatus(event)}
-              >
-                <option selected value="Available">
-                  Available
-                </option>
-                <option value="Sold Out">Sold Out</option>
-              </select>
-            </div>
-          </div>
-          <div className="form-group">
-            <label for="productInformation">Product Information</label>
-            <input
-              name="productInformation"
-              type="text"
-              className="form-control"
-              id="productInformation"
-              placeholder="e.g. Product Information"
-              value={this.state.productInformation}
-              onChange={(event) => this.changeHandler(event)}
-              //   onChange={(event) => this.handleChangeProductInformation(event)}
-            />
-          </div>
-          <div class="form-group">
-            <label for="productDetails">Product Details</label>
-            <input
-              name="productDetails"
-              type="text"
-              className="form-control"
-              id="productDetails"
-              placeholder="e.g. 224 35 R17"
-              value={this.state.productDetails}
-              onChange={(event) => this.changeHandler(event)}
-              //   onChange={(event) => this.handleChangeProductDetails(event)}
-            />
-          </div>
+        <div className="container">
+          <div class="row">
+            <div className="col-sm-6">
+              <div class="card">
+                <div className="card-body">
+                  <label for="productName">Product Name</label>
+                  <input
+                    name="productName"
+                    type="text"
+                    className="form-control"
+                    id="productName"
+                    value={this.state.productName}
+                    onChange={(event) => this.changeHandler(event)}
+                    // onChange={(event) => this.handleChangeProductName(event)}
+                  />
 
-          <input type="submit" value="Submit" className="" />
-        </form>
+                  <label for="productBrand">Product Brand</label>
+                  <input
+                    name="productBrand"
+                    type="text"
+                    className="form-control"
+                    id="productBrand"
+                    value={this.state.productBrand}
+                    onChange={(event) => this.changeHandler(event)}
+                    // onChange={(event) => this.handleChangeProductBrand(event)}
+                  />
+
+                  <label for="productPrice">Product Price</label>
+                  <input
+                    name="productPrice"
+                    type="text"
+                    className="form-control"
+                    id="productPrice"
+                    value={this.state.productPrice}
+                    onChange={(event) => this.changeHandler(event)}
+                    // onChange={(event) => this.handleChangeProductPrice(event)}
+                  />
+
+                  <label for="Status">Status</label>
+                  <select
+                    name="productStatus"
+                    id="Status"
+                    className="form-control"
+                    onChange={(event) => this.changeHandler(event)}
+                    // onChange={(event) => this.handleChangeProductStatus(event)}
+                  >
+                    <option selected value="Available">
+                      Available
+                    </option>
+                    <option value="Sold Out">Sold Out</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <label for="productInformation">Product Information</label>
+                  <input
+                    name="productInformation"
+                    type="text"
+                    className="form-control"
+                    id="productInformation"
+                    placeholder="e.g. Product Information"
+                    value={this.state.productInformation}
+                    onChange={(event) => this.changeHandler(event)}
+                    //   onChange={(event) => this.handleChangeProductInformation(event)}
+                  />
+                  <label for="productDetails">Product Details</label>
+                  <input
+                    name="productDetails"
+                    type="text"
+                    className="form-control"
+                    id="productDetails"
+                    placeholder="e.g. 224 35 R17"
+                    value={this.state.productDetails}
+                    onChange={(event) => this.changeHandler(event)}
+                    //   onChange={(event) => this.handleChangeProductDetails(event)}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <hr />
+        <div className="container">
+          {/* <div className="row"> */}
+          <div className="card text-center">
+            {/* <div className="card-header">Feature</div> */}
+            <div className="card-body">
+              {this.props.uploaded ? (
+                <div>
+                  <label class="sr-only" for="inlineFormInputGroup">
+                    Username
+                  </label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        Product Image id [MongoDB id]
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inlineFormInputGroup"
+                      placeholder={this.props.imageData.id}
+                      disabled
+                    />
+                  </div>
+                </div>
+              ) : null}
 
-        <button
-          className="btn btn-primary btn-block"
-          onClick={() => this.uploadProduct()}
-        >
-          uploadProduct Information
-        </button>
+              <button
+                className="btn btn-primary btn-block"
+                onClick={() => this.uploadProduct()}
+              >
+                Upload Product Information
+              </button>
+            </div>
+            {/* <div className="card-footer text-muted">2 days ago</div> */}
+          </div>
+          {/* </div> */}
+        </div>
+        {this.props.formUploaded ? (
+          <UIProConfirmation
+            imageSrc={this.props.imageSrc}
+            imageData={this.props.imageData}
+            productForm={this.props.productForm}
+          />
+        ) : null}
       </div>
     );
   }
@@ -377,9 +389,7 @@ const mapStateToProps = (state) => {
     imageSrc: state.product.imageSrc,
     loading: state.product.loading,
     uploaded: state.product.uploaded,
-    // ings: state.burgerBuilder.ingredients,
-    // price: state.burgerBuilder.totalPrice,
-    // error: state.burgerBuilder.error,
+    formUploaded: state.product.formUploaded,
   };
 };
 

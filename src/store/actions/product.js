@@ -31,8 +31,9 @@ export const setProduct = (productForm) => {
       prod_name: productForm.productName,
       prod_price: productForm.productPrice,
       prod_info: productForm.productInformation,
-      prod_details: productForm.productDetails,
       prod_status: productForm.productStatus,
+      prod_details: productForm.productDetails,
+      prod_imageId: productForm.productImageId,
     }),
   };
 

@@ -13,21 +13,6 @@ router.get("/", async (req, res) => {
 });
 //添加数据
 router.post("/", async (req, res) => {
-  // console.log(
-  //   "post“/” is actived " +
-  //     " " +
-  //     req.body.prod_brand +
-  //     " " +
-  //     req.body.prod_name +
-  //     " " +
-  //     req.body.prod_price +
-  //     " " +
-  //     req.body.prod_info +
-  //     " " +
-  //     req.body.prod_details +
-  //     " " +
-  //     req.body.prod_status
-  // );
   const prod = new Prod({
     prod_brand: req.body.prod_brand,
     prod_name: req.body.prod_name,
@@ -35,6 +20,7 @@ router.post("/", async (req, res) => {
     prod_info: req.body.prod_info,
     prod_details: req.body.prod_details,
     prod_status: req.body.prod_status,
+    prod_image_id: req.body.prod_imageId,
     // prod_image_id: req.body.prod_image_id
   });
   try {

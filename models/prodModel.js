@@ -25,13 +25,14 @@ const PostSchema = mongoose.Schema({
     enum: ["Available", "Sold Out"],
     required: true,
   },
+
   prod_upload_date: {
     type: Date,
     dafault: Date.now,
   },
-  // prod_image_id: {
-  //   type: Number,
-  //   required: true,
-  // },
+  prod_image_id: {
+    type: String,
+    required: true,
+  },
 });
 module.exports = mongoose.model("Products", PostSchema);

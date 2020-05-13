@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.UPLOAD_PRODUCT_FORM_SUCCESS:
       return {
         ...state,
-        uploaded: true,
+        formUploaded: true,
         loading: false,
         productForm: action.productForm,
       };
@@ -49,7 +49,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        uploaded: false,
+        formUploaded: false,
       };
 
     case actionTypes.UPLOAD_PRODUCT_IMAGE_START:
