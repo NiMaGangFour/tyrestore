@@ -16,60 +16,56 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // case actionTypes.ADD_PRODUCT:
-    //   return {
-    //     ...state,
-    //     productName: {
-    //       salad: INGREDIENT_PRICES.salad,
-    //       bacon: INGREDIENT_PRICES.salad,
-    //       cheese: INGREDIENT_PRICES.salad,
-    //       meat: INGREDIENT_PRICES.salad,
-    //     },
-    //     totalPrice: 4,
-    //     error: false,
-    //   };
-    // case actionTypes.SET_PRODUCT:
-    //   return {
-    //     ...state,
-    //     productForm: action.productForm,
-    //   };
+    // FORM
     case actionTypes.UPLOAD_PRODUCT_FORM_START:
       return {
         ...state,
-        loading: true,
+        formLoading: true,
       };
+    // FORM
     case actionTypes.UPLOAD_PRODUCT_FORM_SUCCESS:
       return {
         ...state,
         formUploaded: true,
-        loading: false,
+        formLoading: false,
         productForm: action.productForm,
       };
+    // FORM
     case actionTypes.UPLOAD_PRODUCT_FORM_FAIL:
       return {
         ...state,
-        loading: false,
+        formLoading: false,
         formUploaded: false,
       };
-
+    // IMAGE
     case actionTypes.UPLOAD_PRODUCT_IMAGE_START:
       return {
         ...state,
-        loading: true,
+        imageLoading: true,
       };
+    // IMAGE
     case actionTypes.UPLOAD_PRODUCT_IMAGE_SUCCESS:
       return {
         ...state,
-        uploaded: true,
-        loading: false,
+        imageUploaded: true,
+        imageLoading: false,
         imageData: action.imageData,
-        imageSrc: "/image/" + action.imageData.filename,
+        imageSrc: "/prodsImage/image/" + action.imageData.filename,
       };
+    // IMAGE
     case actionTypes.UPLOAD_PRODUCT_IMAGE_FAIL:
       return {
         ...state,
-        loading: false,
-        uploaded: false,
+        imageLoading: false,
+        imageUploaded: false,
+      };
+
+    // DELTE IMAGE
+    case actionTypes.DELETE_PRODUCT_IMAGE_SUCCESS:
+      return {
+        ...state,
+        // imageLoading: false,
+        imageUploaded: false,
       };
 
     default:

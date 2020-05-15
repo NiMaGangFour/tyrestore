@@ -34,17 +34,12 @@ app.listen(port, () =>
 );
 
 // Mongo URI
-//mongodb+srv://dbUser:<password>@cluster0-frk7s.mongodb.net/test?retryWrites=true&w=majority
 const mongoURI =
   "mongodb+srv://dbUser:nCRo9dSrxTl3rBfg@cluster0-frk7s.mongodb.net/tyrestore_dev?retryWrites=true&w=majority";
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
 });
-
-// const mongoURI =
-//   "mongodb+srv://dbUser:nCRo9dSrxTl3rBfg@cluster0-frk7s.mongodb.net/tyrestore_dev?retryWrites=true&w=majority";
-// const conn = mongoose.createConnection(mongoURI);
 
 //Init gfs - grid Stream
 let gfs;
@@ -117,85 +112,6 @@ app.post("/express_backend", (req, res) => {
   res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
 });
 
-//@route GET / files
-//@desc Display all files in JSON (inlcude no image files)
-app.get("/files", (req, res) => {
-  gfs.files.find().toArray((err, files) => {
-    //Check if files
-    if (!files || files.length === 0) {
-      return res.status(404).json({
-        err: "No file exist",
-      });
-    }
-
-    //Files exist
-    return res.json(files);
-  });
-});
-
-//@desc list all file
-//@desc Display all image files in JSON
-app.get("/images", (req, res) => {
-  gfs.files.find().toArray((err, files) => {
-    //Check if files
-    if (!files || files.length === 0) {
-      return res.status(404).json({
-        err: "No file exist",
-      });
-    } else {
-      files.map((file) => {
-        if (
-          file.contentType === "image/jpeg" ||
-          file.contentType === "image/png"
-        ) {
-          file.isImage = true;
-        } else {
-          file.isImage = false;
-        }
-      });
-      return res.json(files);
-    }
-  });
-});
-
-//@route GET /files/:filename
-//@desc Display single file object
-app.get("/files/:filename", (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    //Check if files
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: "No file exist",
-      });
-    }
-    //Files exist
-    return res.json(file);
-  });
-});
-
-//@route GET /image/:filename
-//@desc Display image
-app.get("/image/:filename", (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    //Check if files
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: "No file exist",
-      });
-    }
-    //Check if image
-    if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
-      //Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    } else {
-      res.status(404).json({
-        err: "Not an image",
-      });
-    }
-  });
-});
-
 // Line 1 and 2 is requiring Express and allows us to use it inside of our server.js file.
 // Line 3 is setting the port that our Express server will be running on.
 // Line 6 will simply console.log a message that will let us know our server is up and running.
@@ -208,4 +124,4 @@ const prodImgRoute = require("./routes/prodImgRoute");
 
 app.use("/posts", postRoute);
 app.use("/prods", prodRoute);
-app.use("/upload", prodImgRoute);
+app.use("/prodsImage", prodImgRoute);

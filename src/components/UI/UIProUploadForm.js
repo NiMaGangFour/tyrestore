@@ -31,7 +31,7 @@ class UIProUploadForm extends Component {
     // console.log("nextProps : " + nextProps);
     // console.log("this.props.uploaded : " + this.props.uploaded);
     // console.log("nextProps.uploaded : " + nextProps.uploaded);
-    if (nextProps.uploaded) {
+    if (nextProps.imageUploaded) {
       this.setState({
         imgPreview: false,
       });
@@ -79,7 +79,7 @@ class UIProUploadForm extends Component {
           selectedFile: file,
           imgPreview: true,
         });
-        console.log(this.state.imgSrcPreview);
+        // console.log(this.state.imgSrcPreview);
       };
     }
   };
@@ -87,32 +87,16 @@ class UIProUploadForm extends Component {
   // Method: Upload Product‘s Image
   uploadProductImg() {
     const selectedFile = this.state.selectedFile;
-    console.log("uploadProductImg() ===>ImgInfo:" + selectedFile);
+    // console.log("uploadProductImg() ===>ImgInfo:" + selectedFile);
     this.props.onSetProductImg(selectedFile);
   }
 
-  //   imgUploadHandler = () => {
-  //     const data = new FormData();
-  //     data.append("file", this.state.selectedFile);
-  //     axios
-  //       .post("/upload", data, {
-  //         // receive two parameter endpoint url ,form data
-  //       })
-  //       .then((res) => {
-  //         // then print response status
-  //         console.log(res.statusText);
-  //         console.log(res.data);
-  //         console.log(res);
-  //         this.setState({
-  //           imgUploaded: true,
-  //           imgId: res.data.id,
-  //           imgOriginalName: res.data.originalname,
-  //           imgFilename: res.data.filename,
-  //           imgBucketName: res.data.bucketName,
-  //           imgUploadDate: res.data.uploadDate,
-  //         });
-  //       });
-  //   };
+  deleteProductImg(imageData) {
+    console.log(">deleteProductImg");
+    // const selectedFile = this.state.selectedFile;
+    // console.log("uploadProductImg() ===>ImgInfo:" + selectedFile);
+    this.props.onDeleteProductImg(imageData);
+  }
 
   render() {
     console.log(this.props);
@@ -124,7 +108,7 @@ class UIProUploadForm extends Component {
           <div className="row">
             <div className="col-sm">
               {/* <div className="card" style={{ width: "18rem" }}> */}
-              {this.props.uploaded ? (
+              {this.props.imageUploaded ? (
                 <div className="card border-success mb-3">
                   <div className="card-body">
                     <h5 className="card-title">Product Image Details</h5>
@@ -196,13 +180,7 @@ class UIProUploadForm extends Component {
                     </label>
                   </div>
                 </div>
-                {/* <input
-                  ref="file"
-                  type="file"
-                  className="form-control-file"
-                  id="file"
-                  onChange={(event) => this.onChangeImgHandler(event)}
-                /> */}
+
                 {this.state.imgPreview ? (
                   <div className="card text-center border-warning mb-3">
                     <div className="card-body">
@@ -217,11 +195,10 @@ class UIProUploadForm extends Component {
                   </div>
                 ) : null}
 
-                {/* <img src="..." className="card-img-top" alt="..." /> */}
-                {this.props.uploaded ? (
+                {this.props.imageUploaded ? (
                   <div className="card text-center border-success mb-3">
                     <div className="card-body">
-                      <h4 className="mb-3">Image aleady in MongoDB</h4>
+                      <h4 className="mb-3">Image already in MongoDB</h4>
                       <img
                         className="card-img-top"
                         style={{ width: "20%" }}
@@ -231,12 +208,31 @@ class UIProUploadForm extends Component {
                     </div>
                   </div>
                 ) : null}
-                <button
-                  className="btn btn-primary btn-block"
-                  onClick={() => this.uploadProductImg()}
-                >
-                  Upload Image
-                </button>
+
+                {this.props.imageLoading ? (
+                  <button class="btn btn-primary btn-block" disabled>
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Image Uploading...
+                  </button>
+                ) : this.props.imageUploaded ? (
+                  <button
+                    className="btn btn-danger btn-block"
+                    onClick={() => this.deleteProductImg(this.props.imageData)}
+                  >
+                    Delete Current Image
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-primary btn-block"
+                    onClick={() => this.uploadProductImg()}
+                  >
+                    Upload Image
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -337,7 +333,7 @@ class UIProUploadForm extends Component {
           <div className="card text-center">
             {/* <div className="card-header">Feature</div> */}
             <div className="card-body">
-              {this.props.uploaded ? (
+              {this.props.imageUploaded ? (
                 <div>
                   <label class="sr-only" for="inlineFormInputGroup">
                     Username
@@ -358,13 +354,27 @@ class UIProUploadForm extends Component {
                   </div>
                 </div>
               ) : null}
-
-              <button
-                className="btn btn-primary btn-block"
-                onClick={() => this.uploadProduct()}
-              >
-                Upload Product Information
-              </button>
+              {this.props.formLoading ? (
+                <button
+                  class="btn btn-primary btn-block"
+                  type="button"
+                  disabled
+                >
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Form Uploading...
+                </button>
+              ) : (
+                <button
+                  className="btn btn-primary btn-block"
+                  onClick={() => this.uploadProduct()}
+                >
+                  Upload Product Information
+                </button>
+              )}
             </div>
             {/* <div className="card-footer text-muted">2 days ago</div> */}
           </div>
@@ -385,11 +395,12 @@ class UIProUploadForm extends Component {
 const mapStateToProps = (state) => {
   return {
     productForm: state.product.productForm,
+    formUploaded: state.product.formUploaded,
+    formLoading: state.product.formLoading,
     imageData: state.product.imageData,
     imageSrc: state.product.imageSrc,
-    loading: state.product.loading,
-    uploaded: state.product.uploaded,
-    formUploaded: state.product.formUploaded,
+    imageLoading: state.product.imageLoading,
+    imageUploaded: state.product.imageUploaded,
   };
 };
 
@@ -399,6 +410,8 @@ const mapDispatchToProps = (dispatch) => {
     onSetProduct: (productForm) => dispatch(actions.setProduct(productForm)),
     onSetProductImg: (selectedFile) =>
       dispatch(actions.setProductImg(selectedFile)),
+    onDeleteProductImg: (imageData) =>
+      dispatch(actions.deleteProductImg(imageData)),
   };
 };
 

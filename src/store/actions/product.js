@@ -81,6 +81,40 @@ export const uploadProductImageFail = (error) => {
   };
 };
 
+export const deleteProductImgSuccess = () => {
+  return {
+    type: actionTypes.DELETE_PRODUCT_IMAGE_SUCCESS,
+  };
+};
+
+export const deleteProductImg = (imageData) => {
+  console.log(">>>deleteProductImg");
+
+  return (dispatch) => {
+    // dispatch(uploadProductImageStart());
+
+    axios
+      // .delete("/prodsImage/image/", { params: { id: imageData.id } })
+      .delete("/prodsImage/image/" + imageData.id)
+      .then(async (response) => {
+        const res = await response;
+        // then print response status
+
+        console.log(res);
+        dispatch(deleteProductImgSuccess(res.data));
+        // if (res.statusText !== "OK") {
+        //   dispatch(uploadProductImageFail(res.status));
+        //   // get error message from body or default to response status
+        //   const error = (data && data.message) || res.status;
+        //   return Promise.reject(error);
+        // }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  };
+};
+
 export const setProductImg = (selectedFile) => {
   const data = new FormData();
   data.append("file", selectedFile);
@@ -88,7 +122,7 @@ export const setProductImg = (selectedFile) => {
   return (dispatch) => {
     dispatch(uploadProductImageStart());
     axios
-      .post("/upload", data, {
+      .post("/prodsImage", data, {
         // receive two parameter endpoint url ,form data
       })
       .then(async (response) => {
