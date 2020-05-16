@@ -65,7 +65,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         // imageLoading: false,
+        imageDeleting: false,
         imageUploaded: false,
+      };
+    // DELTE IMAGE
+    case actionTypes.DELETE_PRODUCT_IMAGE_START:
+      return {
+        ...state,
+        // imageLoading: false,
+        imageDeleting: true,
+      };
+    // DELTE IMAGE
+    case actionTypes.DELETE_PRODUCT_IMAGE_FAIL:
+      return {
+        ...state,
+        // imageLoading: false,
+        imageDeleting: false,
       };
 
     default:

@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
 
-/* Action: Product's Form Upload */
+/* ACTION: --- UPLOAD FORM --- */
 export const uploadProductFormStart = () => {
   return {
     type: actionTypes.UPLOAD_PRODUCT_FORM_START,
@@ -60,7 +60,7 @@ export const setProduct = (productForm) => {
   };
 };
 
-/* Action: Product's Image Upload */
+/* ACTION: --- UPLOAD IMAGE --- */
 export const uploadProductImageStart = () => {
   return {
     type: actionTypes.UPLOAD_PRODUCT_IMAGE_START,
@@ -78,40 +78,6 @@ export const uploadProductImageFail = (error) => {
   return {
     type: actionTypes.UPLOAD_PRODUCT_IMAGE_FAIL,
     error: error,
-  };
-};
-
-export const deleteProductImgSuccess = () => {
-  return {
-    type: actionTypes.DELETE_PRODUCT_IMAGE_SUCCESS,
-  };
-};
-
-export const deleteProductImg = (imageData) => {
-  console.log(">>>deleteProductImg");
-
-  return (dispatch) => {
-    // dispatch(uploadProductImageStart());
-
-    axios
-      // .delete("/prodsImage/image/", { params: { id: imageData.id } })
-      .delete("/prodsImage/image/" + imageData.id)
-      .then(async (response) => {
-        const res = await response;
-        // then print response status
-
-        console.log(res);
-        dispatch(deleteProductImgSuccess(res.data));
-        // if (res.statusText !== "OK") {
-        //   dispatch(uploadProductImageFail(res.status));
-        //   // get error message from body or default to response status
-        //   const error = (data && data.message) || res.status;
-        //   return Promise.reject(error);
-        // }
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-      });
   };
 };
 
@@ -142,5 +108,51 @@ export const setProductImg = (selectedFile) => {
       .catch((error) => {
         console.error("There was an error!", error);
       });
+  };
+};
+
+/* ACTION: --- DELETE IMAGE --- */
+export const deleteProductImg = (imageData) => {
+  console.log(">>>deleteProductImg");
+
+  return (dispatch) => {
+    dispatch(deleteProductImageStart());
+
+    axios
+      .delete("/prodsImage/image/" + imageData.id)
+      .then(async (response) => {
+        const res = await response;
+        // then print response status
+
+        console.log(res);
+        dispatch(deleteProductImgSuccess(res.data));
+        if (res.statusText !== "OK") {
+          dispatch(deleteProductImageFail(res.status));
+          // get error message from body or default to response status
+          const error = res.status;
+          return Promise.reject(error);
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  };
+};
+
+export const deleteProductImageStart = () => {
+  return {
+    type: actionTypes.DELETE_PRODUCT_IMAGE_START,
+  };
+};
+
+export const deleteProductImgSuccess = () => {
+  return {
+    type: actionTypes.DELETE_PRODUCT_IMAGE_SUCCESS,
+  };
+};
+
+export const deleteProductImageFail = () => {
+  return {
+    type: actionTypes.DELETE_PRODUCT_IMAGE_FAIL,
   };
 };

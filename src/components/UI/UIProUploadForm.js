@@ -225,6 +225,15 @@ class UIProUploadForm extends Component {
                   >
                     Delete Current Image
                   </button>
+                ) : this.props.imageDeleting ? (
+                  <button class="btn btn-danger btn-block" disabled>
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Image Deleting...
+                  </button>
                 ) : (
                   <button
                     className="btn btn-primary btn-block"
@@ -401,6 +410,7 @@ const mapStateToProps = (state) => {
     imageSrc: state.product.imageSrc,
     imageLoading: state.product.imageLoading,
     imageUploaded: state.product.imageUploaded,
+    imageDeleting: state.product.imageDeleting,
   };
 };
 
