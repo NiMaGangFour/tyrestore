@@ -134,8 +134,11 @@ router.get("/files/:filename", (req, res) => {
 
 //@route GET /image/:filename
 //@desc Display image
-router.get("/image/:filename", (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+router.get("/image/:id", (req, res) => {
+  console.log("req.params>>>", req.params);
+  const fileId = new mongoose.mongo.ObjectId(req.params.id);
+  gfs.files.findOne({ _id: fileId }, (err, file) => {
+    console.log("file  <<<>>>", file);
     //Check if files
     if (!file || file.length === 0) {
       return res.status(404).json({
@@ -145,7 +148,8 @@ router.get("/image/:filename", (req, res) => {
     //Check if image
     if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
       //Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
+      console.log("file>>>", file);
+      const readstream = gfs.createReadStream(file._id);
       readstream.pipe(res);
     } else {
       res.status(404).json({

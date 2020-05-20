@@ -5,7 +5,7 @@ import {
   NavDropdown,
   Form,
   FormControl,
-  Button
+  Button,
 } from "react-bootstrap";
 
 import "../css/Components.css";
@@ -43,6 +43,7 @@ class Header extends Component {
               <Nav.Link href="/contact">Contact</Nav.Link>
               <Nav.Link href="/news">News</Nav.Link>
               <Nav.Link href="/faq">FAQs</Nav.Link>
+              <Nav.Link href="/admin">Admin</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">

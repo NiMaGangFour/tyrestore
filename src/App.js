@@ -10,6 +10,7 @@ import Contact from "./components/Pages/Contact";
 import FAQ from "./components/Pages/FAQ";
 import News from "./components/Pages/News";
 import Tyres from "./components/Pages/Tyres";
+import Admin from "./components/Pages/Admin";
 import Footer from "./components/Footer/Footer";
 import UIProUploadForm from "./components/UI/UIProUploadForm";
 
@@ -124,8 +125,8 @@ class App extends Component {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/faq" component={FAQ} />
           <Route exact path="/news" component={News} />
-
           <Route exact path="/tyres" component={Tyres} />
+          <Route exact path="/admin" component={Admin} />
         </Switch>
         <Footer />
         <header className="App-header">
@@ -147,9 +148,6 @@ class App extends Component {
         <p className="App-intro">{this.state.data}</p>
         <h1>Get Data from MongoDB?</h1>
         <p className="App-intro">{this.state.noteData}</p>
-        <div>
-          <UIProUploadForm upload={() => this.postProductText()} />
-        </div>
       </div>
     );
   }

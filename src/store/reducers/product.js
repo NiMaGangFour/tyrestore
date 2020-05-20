@@ -50,7 +50,8 @@ const reducer = (state = initialState, action) => {
         imageUploaded: true,
         imageLoading: false,
         imageData: action.imageData,
-        imageSrc: "/prodsImage/image/" + action.imageData.filename,
+        // imageSrc: "/prodsImage/image/" + action.imageData.filename,
+        imageSrc: "/prodsImage/image/" + action.imageData.id,
       };
     // IMAGE
     case actionTypes.UPLOAD_PRODUCT_IMAGE_FAIL:

@@ -43,7 +43,7 @@ class Landing extends Component {
                 CardImgStyle={{
                   height: "15rem",
                   width: "100%",
-                  border: "2px solid #000"
+                  border: "2px solid #000",
                 }}
                 cardButtomText="button"
                 cardButtonVarient="outline-primary"
@@ -57,7 +57,7 @@ class Landing extends Component {
                 CardImgStyle={{
                   height: "15rem",
                   width: "100%",
-                  border: "2px solid #000"
+                  border: "2px solid #000",
                 }}
                 cardButtomText="button"
                 cardButtonVarient="outline-primary"
@@ -74,7 +74,7 @@ class Landing extends Component {
                 CardStyle={{ float: "right" }}
                 CardImgStyle={{
                   height: "15rem",
-                  width: "100%"
+                  width: "100%",
                 }}
                 cardButtomText="Shop"
                 cardButtonVarient="outline-primary"
@@ -87,7 +87,7 @@ class Landing extends Component {
                 CardImg={tyre_02}
                 CardImgStyle={{
                   height: "15rem",
-                  width: "100%"
+                  width: "100%",
                 }}
                 cardButtomText="Shop"
                 cardButtonVarient="outline-primary"
@@ -103,7 +103,7 @@ class Landing extends Component {
                 CardStyle={{ float: "right" }}
                 CardImgStyle={{
                   height: "15rem",
-                  width: "100%"
+                  width: "100%",
                 }}
                 cardButtomText="Shop"
                 cardButtonVarient="outline-primary"
@@ -116,7 +116,7 @@ class Landing extends Component {
                 CardImg={tyre_04}
                 CardImgStyle={{
                   height: "15rem",
-                  width: "100%"
+                  width: "100%",
                 }}
                 cardButtomText="Shop"
                 cardButtonVarient="outline-primary"
@@ -140,7 +140,7 @@ class Landing extends Component {
                 CardImg={img_Bridgeston}
                 CardImgStyle={{
                   height: "15rem",
-                  width: "100%"
+                  width: "100%",
                 }}
                 cardButtomText="Shop"
                 cardButtonVarient="outline-primary"
@@ -153,7 +153,7 @@ class Landing extends Component {
                 CardImg={img_Continental_01}
                 CardImgStyle={{
                   height: "15rem",
-                  width: "100%"
+                  width: "100%",
                 }}
                 cardButtomText="Shop"
                 cardButtonVarient="outline-primary"
@@ -166,7 +166,7 @@ class Landing extends Component {
                 CardImg={img_Continental_02}
                 CardImgStyle={{
                   height: "15rem",
-                  width: "100%"
+                  width: "100%",
                 }}
                 cardButtomText="Shop"
                 cardButtonVarient="outline-primary"
@@ -179,7 +179,7 @@ class Landing extends Component {
                 CardImg={img_Michelin}
                 CardImgStyle={{
                   height: "15rem",
-                  width: "100%"
+                  width: "100%",
                 }}
                 cardButtomText="Shop"
                 cardButtonVarient="outline-primary"
@@ -192,7 +192,7 @@ class Landing extends Component {
               CardImg_style={{
                 width: "auto",
                 position: "absolute",
-                bottom: "0"
+                bottom: "0",
               }}
               cardTitle="Michelin Primacy 4 Tyres"
               cardText="

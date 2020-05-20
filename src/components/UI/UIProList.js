@@ -2,22 +2,25 @@ import React from "react";
 import { Col, Button, Card } from "react-bootstrap";
 import "./UIProList.scss";
 
-const UIProList = ({ posts, loading }) => {
+const UIProList = ({ prods, loading }) => {
   if (loading) {
     return <h2>Loading....</h2>;
   }
+
+  const imgSrc = (id) => {
+    const imageSrc = "/prodsImage/image/" + id;
+    return <Card.Img variant="top" src={imageSrc} />;
+  };
+
   return (
     <div>
-      {posts.map((post) => (
-        <Col key={post.id} xs={2} lg="3" className="col-card">
+      {prods.map((prod) => (
+        <Col key={prod.id} xs={2} lg="3" className="col-card">
           <Card className="prod-card">
-            {/* <Card.Img variant="top" src={post.thumbnailUrl} /> */}
+            {imgSrc(prod.prod_image_id)}
             <Card.Body>
-              <Card.Title>{post.title}</Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </Card.Text>
+              <Card.Title>{prod.prod_name}</Card.Title>
+              <Card.Text>{prod.prod_price}</Card.Text>
               <Button variant="primary">Go somewhere</Button>
             </Card.Body>
           </Card>

@@ -123,5 +123,6 @@ const prodRoute = require("./routes/prodRoute");
 const prodImgRoute = require("./routes/prodImgRoute");
 
 app.use("/posts", postRoute);
+
 app.use("/prods", prodRoute);
 app.use("/prodsImage", prodImgRoute);
