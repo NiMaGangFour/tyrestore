@@ -1,11 +1,28 @@
 import React, { Component } from "react";
-
 import { Form, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 import "./UIFilter.scss";
 
 class UIFilter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      brand: null,
+      price: null,
+    };
+  }
+
+  changeHandler(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  searchHandler(brand, price) {
+    this.props.togglePopUp(brand, price);
+  }
+
   render() {
-    // console.log(this.props);
+    console.log("UIFilter: this.props >>>", this.props);
 
     return (
       <div>
@@ -14,7 +31,13 @@ class UIFilter extends Component {
           <Form.Label>
             <h4>Brand</h4>
           </Form.Label>
-          <Form.Control className="cont-select" as="select">
+          <Form.Control
+            className="cont-select"
+            as="select"
+            name="brand"
+            value={this.state.brand}
+            onChange={(event) => this.changeHandler(event)}
+          >
             <option>All</option>
             <option>Brand A</option>
             <option>Brand B</option>
@@ -23,14 +46,26 @@ class UIFilter extends Component {
           <Form.Label>
             <h4>Price</h4>
           </Form.Label>
-          <Form.Control as="select">
+          <Form.Control
+            as="select"
+            name="price"
+            value={this.state.price}
+            onChange={(event) => this.changeHandler(event)}
+          >
             <option>All</option>
             <option>$200 - $250</option>
             <option>$250 - $300</option>
             <option>$300 - $350</option>
             <option>$350 - $500</option>
           </Form.Control>
-          <Button className="btn-search">Refine Search</Button>{" "}
+          <Button
+            className="btn-search"
+            onClick={() =>
+              this.searchHandler(this.state.brand, this.state.price)
+            }
+          >
+            Refine Search
+          </Button>
           <Button className="btn-clear">Clear all</Button>
         </Form.Group>
       </div>
@@ -38,4 +73,17 @@ class UIFilter extends Component {
   }
 }
 
-export default UIFilter;
+const mapStateToProps = (state) => {
+  return {
+    productForm: state.product.productForm,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // onAddProduct: () => dispatch(actions.addProduct()),
+    onSetProduct: (productForm) => dispatch(actions.setProduct(productForm)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UIFilter);

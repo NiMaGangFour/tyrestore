@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 import { Container, Row, Col } from "react-bootstrap";
@@ -18,6 +18,8 @@ function Tyres() {
   const [prodsPerPage] = useState(10);
 
   const [prodImage, setProdImage] = useState([]);
+
+  const [cbValue, setcbValue] = useState({ brandValue: "", priceValie: "" });
 
   // const [posts, setPosts] = useState([]);
   // const [postsPerPage] = useState(10);
@@ -50,6 +52,24 @@ function Tyres() {
     fetchProdImage();
   }, []);
 
+  const [popup, setPopup] = useState(false);
+  const togglePopUp = useCallback(
+    (brand, price) => {
+      // setPopup(!popup);
+      setcbValue({ brandValue: brand, priceValue: price });
+    },
+    [cbValue]
+  );
+
+  console.log(cbValue);
+
+  const filterProds = (brand, price) => {
+    let fileredProds = prods.filter((prod) => {
+      return prod.prod_brand.indexOf(brand) !== -1;
+    });
+    console.log(fileredProds);
+  };
+
   //Get current produts
   const indexOfLastProd = currentPage * prodsPerPage;
   const indexOfFirstProd = indexOfLastProd - prodsPerPage;
@@ -67,7 +87,7 @@ function Tyres() {
       <Container>
         <Row>
           <Col style={{ backgroundColor: "green" }} lg="2" sm={3}>
-            <UIFilter />
+            <UIFilter popup={popup} togglePopUp={togglePopUp} />
           </Col>
           <Col style={{ backgroundColor: "aqua" }} lg="10" sm={9}>
             <Row>

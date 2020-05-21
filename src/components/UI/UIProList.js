@@ -9,7 +9,10 @@ const UIProList = ({ prods, loading }) => {
 
   const imgSrc = (id) => {
     const imageSrc = "/prodsImage/image/" + id;
-    return <Card.Img variant="top" src={imageSrc} />;
+    return (
+      // <Card.Img variant="top" src={imageSrc} style={{ maxWidth: "240px" }} />
+      <Card.Img variant="top" src={imageSrc} />
+    );
   };
 
   return (
@@ -20,7 +23,7 @@ const UIProList = ({ prods, loading }) => {
             {imgSrc(prod.prod_image_id)}
             <Card.Body>
               <Card.Title>{prod.prod_name}</Card.Title>
-              <Card.Text>{prod.prod_price}</Card.Text>
+              <Card.Text>{prod.prod_price} $AUD</Card.Text>
               <Button variant="primary">Go somewhere</Button>
             </Card.Body>
           </Card>
