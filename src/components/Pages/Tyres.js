@@ -56,25 +56,26 @@ function Tyres() {
   const togglePopUp = useCallback(
     (brand, price) => {
       // setPopup(!popup);
-      setcbValue({ brandValue: brand, priceValue: price });
+      setcbValue({ brandValue: brand, priceValue: price }, filterProds());
     },
     [cbValue]
   );
-
   console.log(cbValue);
 
-  const filterProds = (brand, price) => {
+  const filterProds = () => {
+    console.log("f: filterProds  prods >>>", prods);
+    console.log("cbValue.brandValue >>>", cbValue.brandValue);
     let fileredProds = prods.filter((prod) => {
-      return prod.prod_brand.indexOf(brand) !== -1;
+      return prod.prod_brand.indexOf(cbValue.brandValue) !== -1;
     });
-    console.log(fileredProds);
+    console.log("fileredProds >>>", fileredProds);
   };
 
   //Get current produts
   const indexOfLastProd = currentPage * prodsPerPage;
   const indexOfFirstProd = indexOfLastProd - prodsPerPage;
   const currentProds = prods.slice(indexOfFirstProd, indexOfLastProd);
-
+  console.log("prods", prods);
   //JavaScript Array concat() Method
   // const prodSets = prods.concat(prodImage);
   // console.log(prodSets);

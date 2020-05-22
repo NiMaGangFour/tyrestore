@@ -39,9 +39,9 @@ class UIFilter extends Component {
             onChange={(event) => this.changeHandler(event)}
           >
             <option>All</option>
-            <option>Brand A</option>
-            <option>Brand B</option>
-            <option>Brand C</option>
+            <option>Bridgestone</option>
+            <option>Michelin</option>
+            <option>Continent</option>
           </Form.Control>
           <Form.Label>
             <h4>Price</h4>
