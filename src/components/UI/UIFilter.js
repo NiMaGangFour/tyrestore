@@ -75,7 +75,12 @@ class UIFilter extends Component {
           >
             Refine Search
           </Button>
-          <Button className="btn-clear">Clear all</Button>
+          <Button
+            className="btn-clear"
+            onClick={() => this.searchHandler("All", "All")}
+          >
+            Clear all
+          </Button>
         </Form.Group>
       </div>
     );

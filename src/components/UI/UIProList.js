@@ -22,7 +22,7 @@ const UIProList = ({ prods, loading }) => {
           <Card className="prod-card">
             {imgSrc(prod.prod_image_id)}
             <Card.Body>
-              <Card.Title>{prod.prod_name}</Card.Title>
+              <Card.Title className="card-title">{prod.prod_name}</Card.Title>
               <Card.Text>{prod.prod_price} $AUD</Card.Text>
               <Button variant="primary">Go somewhere</Button>
             </Card.Body>

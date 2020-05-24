@@ -14,6 +14,16 @@ $break-320: 320px;
   .col-card {
     padding: 0px 0px 0px 10px !important;
   }
+
+  .card-title {
+    min-height: 70px !important;
+  }
+}
+
+@media only screen and (max-width: $break-1440) {
+  .card-title {
+    min-height: 70px !important;
+  }
 }
 
 @media only screen and (max-width: $break-1024) {

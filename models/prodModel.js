@@ -9,7 +9,7 @@ const PostSchema = mongoose.Schema({
     required: true,
   },
   prod_price: {
-    type: String,
+    type: Number,
     required: true,
   },
   prod_info: {

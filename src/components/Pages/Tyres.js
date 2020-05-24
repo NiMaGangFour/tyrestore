@@ -55,26 +55,35 @@ function Tyres() {
   }, []);
 
   const searchHandler = (brand, price) => {
-    // setPopup(!popup);
-    console.log("searchHandler()  brand >>>", brand);
-    console.log("searchHandler()  price >>>", price);
-    console.log("searchHandler()  prods >>>", prods);
+    // console.log("searchHandler()  brand >>>", brand);
+    // console.log("searchHandler()  price >>>", price);
+    // console.log("searchHandler()  prods >>>", prods);
     setcbValue({ brandValue: brand, priceValue: price });
   };
 
   useEffect(() => {
-    console.log("filterProds()  cbValue >>>", cbValue);
-    console.log("filterProds()  prods >>>", prods);
-    console.log("filterProds()  cbValue.brandValue >>>", cbValue.brandValue);
-    // if (cbValue.brandValue === "" || cbValue.brandValue === "") {
-    //   fetchProds();
-    //   fetchProdImage();
-    // }
+    // console.log("filterProds()  cbValue >>>", cbValue);
+    // console.log("filterProds()  prods >>>", prods);
+    // console.log("filterProds()  cbValue.brandValue >>>", cbValue.brandValue);
+
     let fileredProdsByBrand = prods.filter((prod) => {
       return prod.prod_brand.indexOf(cbValue.brandValue) !== -1;
     });
     let fileredProdsByPrice = fileredProdsByBrand.filter((prod) => {
-      return prod.prod_price.indexOf(cbValue.priceValue) !== -1;
+      // let priceRange = [200,250];
+      // if(cbValue.priceValue === "$200 - $250")
+      console.log("prod.prod_price >>>", prod.prod_price);
+      if (cbValue.priceValue === "$200 - $250") {
+        return 200 <= prod.prod_price && prod.prod_price <= 250;
+      } else if (cbValue.priceValue === "$250 - $300") {
+        return 250 <= prod.prod_price && prod.prod_price <= 300;
+      } else if (cbValue.priceValue === "$300 - $350") {
+        return 300 <= prod.prod_price && prod.prod_price <= 350;
+      } else if (cbValue.priceValue === "$350 - $500") {
+        return 350 <= prod.prod_price && prod.prod_price <= 500;
+      } else {
+        return prod.prod_price >= 0;
+      }
     });
 
     console.log("filterProds()  fileredProdsByPrice >>>", fileredProdsByPrice);
