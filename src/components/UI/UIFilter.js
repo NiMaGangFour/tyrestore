@@ -30,6 +30,16 @@ class UIFilter extends Component {
     console.log("this.state.price", price);
   };
 
+  clearHandler = (brand, price) => {
+    this.setState({
+      brand: "All",
+      price: "All",
+    });
+    this.props.searchHandler(brand, price);
+    console.log("this.state.brand", brand);
+    console.log("this.state.price", price);
+  };
+
   render() {
     // console.log("UIFilter: this.props >>>", this.props);
 
@@ -77,7 +87,7 @@ class UIFilter extends Component {
           </Button>
           <Button
             className="btn-clear"
-            onClick={() => this.searchHandler("All", "All")}
+            onClick={() => this.clearHandler("", "")}
           >
             Clear all
           </Button>
