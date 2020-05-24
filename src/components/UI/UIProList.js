@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Col, Button, Card } from "react-bootstrap";
 import "./UIProList.scss";
 
@@ -14,7 +15,7 @@ const UIProList = ({ prods, loading }) => {
       <Card.Img variant="top" src={imageSrc} />
     );
   };
-
+  console.log(prods);
   return (
     <div>
       {prods.map((prod) => (
@@ -24,7 +25,9 @@ const UIProList = ({ prods, loading }) => {
             <Card.Body>
               <Card.Title className="card-title">{prod.prod_name}</Card.Title>
               <Card.Text>{prod.prod_price} $AUD</Card.Text>
-              <Button variant="primary">Go somewhere</Button>
+              <Link to={`/tyres/${prod._id}`} className="btn btn-primary">
+                Shop
+              </Link>
             </Card.Body>
           </Card>
         </Col>

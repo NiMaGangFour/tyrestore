@@ -13,6 +13,7 @@ import Tyres from "./components/Pages/Tyres";
 import Admin from "./components/Pages/Admin";
 import Footer from "./components/Footer/Footer";
 import UIProUploadForm from "./components/UI/UIProUploadForm";
+import UIProShow from "./components/UI/UIProShow";
 
 class App extends Component {
   state = {
@@ -127,6 +128,7 @@ class App extends Component {
           <Route exact path="/news" component={News} />
           <Route exact path="/tyres" component={Tyres} />
           <Route exact path="/admin" component={Admin} />
+          <Route exact path="/tyres/:variable" component={UIProShow} />
         </Switch>
         <Footer />
         <header className="App-header">
