@@ -15,6 +15,7 @@ function Tyres() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [prods, setProds] = useState([]);
+  const [prodsTemp, setProdsTemp] = useState([]);
   const [prodsPerPage] = useState(10);
 
   const [prodImage, setProdImage] = useState([]);
@@ -23,6 +24,23 @@ function Tyres() {
 
   // const [posts, setPosts] = useState([]);
   // const [postsPerPage] = useState(10);
+  const fetchProds = async () => {
+    setLoading(true);
+    console.log("fetchProds >");
+    const res = await axios.get("/prods");
+    // console.log("/prods", res.data);
+    setProds(res.data);
+    setProdsTemp(res.data);
+    setLoading(false);
+  };
+
+  const fetchProdImage = async () => {
+    setLoading(true);
+    const res = await axios.get("/prodsImage/images");
+    // console.log("/prodsImage/images", res.data);
+    setProdImage(res.data);
+    setLoading(false);
+  };
 
   useEffect(() => {
     // const fetchPosts = async () => {
@@ -32,50 +50,43 @@ function Tyres() {
     //   setLoading(false);
     // };
 
-    const fetchProds = async () => {
-      setLoading(true);
-      const res = await axios.get("/prods");
-      console.log("/prods", res.data);
-      setProds(res.data);
-      setLoading(false);
-    };
-
-    const fetchProdImage = async () => {
-      setLoading(true);
-      const res = await axios.get("/prodsImage/images");
-      console.log("/prodsImage/images", res.data);
-      setProdImage(res.data);
-      setLoading(false);
-    };
-
     fetchProds();
     fetchProdImage();
   }, []);
 
-  const [popup, setPopup] = useState(false);
-  const togglePopUp = useCallback(
-    (brand, price) => {
-      // setPopup(!popup);
-      setcbValue({ brandValue: brand, priceValue: price }, filterProds());
-    },
-    [cbValue]
-  );
-  console.log(cbValue);
+  const searchHandler = (brand, price) => {
+    // setPopup(!popup);
+    console.log("searchHandler()  brand >>>", brand);
+    console.log("searchHandler()  price >>>", price);
+    console.log("searchHandler()  prods >>>", prods);
+    setcbValue({ brandValue: brand, priceValue: price });
+  };
 
-  const filterProds = () => {
-    console.log("f: filterProds  prods >>>", prods);
-    console.log("cbValue.brandValue >>>", cbValue.brandValue);
-    let fileredProds = prods.filter((prod) => {
+  useEffect(() => {
+    console.log("filterProds()  cbValue >>>", cbValue);
+    console.log("filterProds()  prods >>>", prods);
+    console.log("filterProds()  cbValue.brandValue >>>", cbValue.brandValue);
+    // if (cbValue.brandValue === "" || cbValue.brandValue === "") {
+    //   fetchProds();
+    //   fetchProdImage();
+    // }
+    let fileredProdsByBrand = prods.filter((prod) => {
       return prod.prod_brand.indexOf(cbValue.brandValue) !== -1;
     });
-    console.log("fileredProds >>>", fileredProds);
-  };
+    let fileredProdsByPrice = fileredProdsByBrand.filter((prod) => {
+      return prod.prod_price.indexOf(cbValue.priceValue) !== -1;
+    });
+
+    console.log("filterProds()  fileredProdsByPrice >>>", fileredProdsByPrice);
+    setProdsTemp(fileredProdsByPrice);
+    console.log("filterProds()  Prods >>>", prods);
+  }, [cbValue]);
 
   //Get current produts
   const indexOfLastProd = currentPage * prodsPerPage;
   const indexOfFirstProd = indexOfLastProd - prodsPerPage;
-  const currentProds = prods.slice(indexOfFirstProd, indexOfLastProd);
-  console.log("prods", prods);
+  const currentProds = prodsTemp.slice(indexOfFirstProd, indexOfLastProd);
+
   //JavaScript Array concat() Method
   // const prodSets = prods.concat(prodImage);
   // console.log(prodSets);
@@ -88,7 +99,7 @@ function Tyres() {
       <Container>
         <Row>
           <Col style={{ backgroundColor: "green" }} lg="2" sm={3}>
-            <UIFilter popup={popup} togglePopUp={togglePopUp} />
+            <UIFilter searchHandler={searchHandler} />
           </Col>
           <Col style={{ backgroundColor: "aqua" }} lg="10" sm={9}>
             <Row>

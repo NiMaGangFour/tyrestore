@@ -108,7 +108,7 @@ class App extends Component {
   callNote = async () => {
     const response = await fetch("/prods");
     const body = await response.json();
-    console.log(body);
+    // console.log(body);
     if (response.status !== 200) {
       throw Error(body.message);
     }

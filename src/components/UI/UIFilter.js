@@ -8,8 +8,8 @@ class UIFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brand: null,
-      price: null,
+      brand: "",
+      price: "",
     };
   }
 
@@ -17,12 +17,21 @@ class UIFilter extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  searchHandler(brand, price) {
-    this.props.togglePopUp(brand, price);
-  }
+  searchHandler = (brand, price) => {
+    if (brand === "All") {
+      brand = "";
+    }
+    if (price === "All") {
+      price = "";
+    }
+
+    this.props.searchHandler(brand, price);
+    console.log("this.state.brand", brand);
+    console.log("this.state.price", price);
+  };
 
   render() {
-    console.log("UIFilter: this.props >>>", this.props);
+    // console.log("UIFilter: this.props >>>", this.props);
 
     return (
       <div>
