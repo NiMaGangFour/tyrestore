@@ -79,3 +79,16 @@ $font_family_h1h2: "Bariol";
 .nav-footer {
   background-color: #2b3c90;
 }
+
+//UILongCard
+.ct-button-1 {
+  background-color: $theme_color2;
+  border: 2px solid $theme_color2;
+  font-size: 18px;
+  font-weight: 600;
+  &:hover {
+    color: $theme_color2;
+    border: 2px solid $theme_color2;
+    background-color: #fff !important;
+  }
+}

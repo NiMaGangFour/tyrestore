@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 import "../css/Components.css";
+import UIHorizontalCard from "./UICardComponents/UIHorizontalCard";
+import UILongCard from "./UICardComponents/UILongCard";
 
 class UIProShow extends Component {
   state = {
@@ -8,6 +10,7 @@ class UIProShow extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.fetchProdInfo()
       .then((res) => this.setState({ prodInfo: res }))
       .catch((err) => console.log(err));
@@ -37,35 +40,18 @@ class UIProShow extends Component {
 
     return (
       <div className="switch-component">
-        <div className="card mb-3">
-          {this.state.prodInfo !== null ? (
-            <div className="row no-gutters">
-              <div className="col-md-4">
-                {/* <img src="..." className="card-img" alt="prod" /> */}
-                {this.imgSrc(this.state.prodInfo.prod_image_id)}
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">
-                    {this.state.prodInfo.prod_name}Card title
-                  </h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-muted">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <h3> Can not get >>> this.state.prodInfo</h3>
-          )}
-        </div>
+        {this.state.prodInfo !== null ? (
+          <div>
+            <UIHorizontalCard
+              prodInfo={this.state.prodInfo}
+              imgSrc={this.imgSrc(this.state.prodInfo.prod_image_id)}
+            />
+            <hr />
+            <UILongCard prodInfo={this.state.prodInfo} />
+          </div>
+        ) : (
+          <h3> Can not get >>> this.state.prodInfo</h3>
+        )}
       </div>
     );
   }
