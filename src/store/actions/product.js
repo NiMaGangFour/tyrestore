@@ -156,3 +156,11 @@ export const deleteProductImageFail = () => {
     type: actionTypes.DELETE_PRODUCT_IMAGE_FAIL,
   };
 };
+
+/* ACTION: --- ADD PROD TO CART --- */
+export const addProdToCart = (prodInfo) => {
+  return {
+    type: actionTypes.ADD_PRODUCT_TO_CART,
+    prodInfo: prodInfo,
+  };
+};

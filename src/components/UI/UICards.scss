@@ -92,3 +92,19 @@ $font_family_h1h2: "Bariol";
     background-color: #fff !important;
   }
 }
+
+//UIHorizontalCard
+.UIHorizontalCard-img {
+  margin: 50px 50px;
+  padding: 50px 50px;
+  width: 80%;
+  border: 2px solid #f6f6f6;
+}
+
+.UIHorizontalCard-body {
+  margin: 50px 50px;
+}
+
+.UIHorizontalCard-body h5 {
+  // margin: 50px 50px;
+}

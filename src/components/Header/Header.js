@@ -12,6 +12,8 @@ import "../css/Components.css";
 
 import Logo_White from "../css/images/logoWhite.png";
 
+import { IoIosCheckmarkCircleOutline, IoIosHeartEmpty } from "react-icons/io";
+
 class Header extends Component {
   render() {
     return (
@@ -44,6 +46,7 @@ class Header extends Component {
               <Nav.Link href="/news">News</Nav.Link>
               <Nav.Link href="/faq">FAQs</Nav.Link>
               <Nav.Link href="/admin">Admin</Nav.Link>
+
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -58,6 +61,15 @@ class Header extends Component {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
+            <Nav>
+              <Nav.Link href="/">
+                <span className="header-icon">
+                  <IoIosCheckmarkCircleOutline />
+                  <span className="badge badge-light">4</span>
+                </span>
+              </Nav.Link>
+            </Nav>
+
             <Form inline>
               <FormControl
                 type="text"

@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 
 import "../css/Components.css";
+import "./UICards.scss";
 import UIHorizontalCard from "./UICardComponents/UIHorizontalCard";
 import UILongCard from "./UICardComponents/UILongCard";
+
+import { connect } from "react-redux";
+// import { ListGroup } from "react-bootstrap";
+
+import "./UIProList.scss";
+import * as actions from "../../store/actions/index";
 
 class UIProShow extends Component {
   state = {
@@ -30,19 +37,29 @@ class UIProShow extends Component {
     const imageSrc = "/prodsImage/image/" + id;
     return (
       // <Card.Img variant="top" src={imageSrc} style={{ maxWidth: "240px" }} />
-      <img className="card-img" src={imageSrc} alt={imageSrc} />
+      <img
+        className="card-img UIHorizontalCard-img"
+        src={imageSrc}
+        alt={imageSrc}
+      />
     );
   };
 
+  addToCart = () => {
+    this.props.onAddProdToCart(this.state.prodInfo);
+    console.log("prodInfo", this.state.prodInfo);
+    console.log("UIProShow  this.props>>", this.props);
+  };
+
   render() {
-    console.log(this.props);
-    console.log(this.state.prodInfo);
+    console.log("UIProShow  this.props>>", this.props);
 
     return (
       <div className="switch-component">
         {this.state.prodInfo !== null ? (
           <div>
             <UIHorizontalCard
+              addToCart={this.addToCart}
               prodInfo={this.state.prodInfo}
               imgSrc={this.imgSrc(this.state.prodInfo.prod_image_id)}
             />
@@ -57,4 +74,17 @@ class UIProShow extends Component {
   }
 }
 
-export default UIProShow;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.product.cart,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddProdToCart: (prodInfo) => dispatch(actions.addProdToCart(prodInfo)),
+    //   onSetProduct: (productForm) => dispatch(actions.setProduct(productForm)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UIProShow);

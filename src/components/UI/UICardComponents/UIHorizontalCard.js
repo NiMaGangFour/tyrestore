@@ -1,34 +1,115 @@
-import React from "react";
+import React, { Component } from "react";
+import "../UICards.scss";
 
-const UIHorizontalCard = ({ prodInfo, imgSrc }) => {
-  //   if (loading) {
-  //     return <h2>Loading....</h2>;
-  //   }
-  return (
-    <div>
-      <div className="card mb-3">
-        <div className="row no-gutters">
-          <div className="col-md-4">
-            {/* <img src="..." className="card-img" alt="prod" /> */}
-            {imgSrc}
-          </div>
-          <div className="col-md-8">
-            <div className="card-body">
-              <h5 className="card-title">{prodInfo.prod_name}Card title</h5>
-              <p className="card-text">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
+class UIHorizontalCard extends Component {
+  addProdToCart = () => {
+    this.props.addToCart();
+  };
+
+  render() {
+    return (
+      <div>
+        <div className="card mb-3">
+          <h5 class="card-header">Tyre Overview</h5>
+          <div className="row no-gutters">
+            <div className="col-md-4">
+              {/* <img src="..." className="card-img" alt="prod" /> */}
+              {this.props.imgSrc}
+            </div>
+            <div className="col-md-8">
+              <div className="card-body UIHorizontalCard-body">
+                <h5 className="card-title">{this.props.prodInfo.prod_name}</h5>
+                <p className="card-text">
+                  This is a wider card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
+                </p>
+                {/* {prodInfo.prod_status === "Available" ? (
+                <p className="card-text">
+                  <span class="badge badge-success">
+                    {prodInfo.prod_status}
+                  </span>
+                </p>
+              ) : (
+                <p className="card-text">
+                  <span class="badge badge-danger">{prodInfo.prod_status}</span>
+                </p>
+              )} */}
+                <p className="card-text">
+                  <span class="badge badge-success">
+                    Simply order a 4 tyres and have delivery included.
+                  </span>
+                </p>
+                <button
+                  href="/"
+                  className="btn btn-primary ct-button-1"
+                  onClick={() => this.addProdToCart()}
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default UIHorizontalCard;
+
+// const UIHorizontalCard = ({ prodInfo, imgSrc, addToCart }) => {
+
+//   const addProdToCart = (prodInfo) => {
+//     addToCart(prodInfo);
+//   };
+
+//   return (
+//     <div>
+//       <div className="card mb-3">
+//         <h5 class="card-header">Tyre Overview</h5>
+//         <div className="row no-gutters">
+//           <div className="col-md-4">
+//             {/* <img src="..." className="card-img" alt="prod" /> */}
+//             {imgSrc}
+//           </div>
+//           <div className="col-md-8">
+//             <div className="card-body UIHorizontalCard-body">
+//               <h5 className="card-title">{prodInfo.prod_name}</h5>
+//               <p className="card-text">
+//                 This is a wider card with supporting text below as a natural
+//                 lead-in to additional content. This content is a little bit
+//                 longer.
+//               </p>
+//               {/* {prodInfo.prod_status === "Available" ? (
+//                 <p className="card-text">
+//                   <span class="badge badge-success">
+//                     {prodInfo.prod_status}
+//                   </span>
+//                 </p>
+//               ) : (
+//                 <p className="card-text">
+//                   <span class="badge badge-danger">{prodInfo.prod_status}</span>
+//                 </p>
+//               )} */}
+//               <p className="card-text">
+//                 <span class="badge badge-success">
+//                   Simply order a 4 tyres and have delivery included.
+//                 </span>
+//               </p>
+//               <button
+//                 href="/"
+//                 className="btn btn-primary ct-button-1"
+//                 onClick={() => addProdToCart(prodInfo)}
+//               >
+//                 Add to Cart
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default UIHorizontalCard;

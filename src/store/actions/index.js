@@ -1,1 +1,6 @@
-export { setProduct, setProductImg, deleteProductImg } from "./product";
+export {
+  setProduct,
+  setProductImg,
+  deleteProductImg,
+  addProdToCart,
+} from "./product";
