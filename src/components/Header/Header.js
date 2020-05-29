@@ -8,6 +8,10 @@ import {
   Button,
 } from "react-bootstrap";
 
+import { connect } from "react-redux";
+import equal from "fast-deep-equal";
+import * as actions from "../../store/actions/index";
+
 import "../css/Components.css";
 
 import Logo_White from "../css/images/logoWhite.png";
@@ -15,7 +19,59 @@ import Logo_White from "../css/images/logoWhite.png";
 import { IoIosCheckmarkCircleOutline, IoIosHeartEmpty } from "react-icons/io";
 
 class Header extends Component {
+  state = {
+    totalProdCount: 0,
+  };
+  componentDidMount() {
+    // let JSparse = JSON.parse(localStorage.getItem("state"));
+    // let cart = JSparse.product.cart;
+    // let tempTotalProdCount = this.state.totalProdCount;
+    // if (cart.length !== 0) {
+    //   cart.map((cart) => {
+    //     tempTotalProdCount = tempTotalProdCount + cart.prod_count;
+    //   });
+    // }
+    // this.setState({ totalProdCount: tempTotalProdCount });
+  }
+  componentWillUpdate() {
+    console.log("componentWillUpdate");
+  }
+  componentDidUpdate(prevProps) {
+    // if (!equal(this.props.cart, prevProps.cart)) {
+    //   console.log("Header.js    componentDidUpdate >>", this.props.cart);
+    // }
+    console.log(
+      "Header.js    componentDidUpdate >>",
+      this.props.totalProdCount
+    );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(
+      "Header.js    componentWillReceiveProps>>",
+      nextProps.totalProdCount
+    );
+    this.setState({ totalProdCount: nextProps.totalProdCount });
+    // let tempTotalProdCount = this.state.totalProdCount;
+    // if (nextProps.cart.length !== 0) {
+    //   nextProps.cart.map((cart) => {
+    //     tempTotalProdCount = tempTotalProdCount + cart.prod_count;
+    //   });
+    // }
+    // this.setState({ totalProdCount: tempTotalProdCount });
+  }
+
+  renderBadges = () => {
+    return (
+      <span className="header-icon">
+        <IoIosCheckmarkCircleOutline />
+        <span className="badge badge-light">{this.state.totalProdCount}</span>
+      </span>
+    );
+  };
+
   render() {
+    // console.log("Header.js  render()>>>  this.props >>", this.props);
     return (
       <div>
         <Navbar
@@ -63,10 +119,13 @@ class Header extends Component {
             </Nav>
             <Nav>
               <Nav.Link href="/">
-                <span className="header-icon">
-                  <IoIosCheckmarkCircleOutline />
-                  <span className="badge badge-light">4</span>
-                </span>
+                {this.state.totalProdCount !== 0 ? (
+                  this.renderBadges()
+                ) : (
+                  <span className="header-icon">
+                    <IoIosCheckmarkCircleOutline />
+                  </span>
+                )}
               </Nav.Link>
             </Nav>
 
@@ -85,4 +144,18 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.product.cart,
+    totalProdCount: state.product.totalProdCount,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // onAddProdToCart: (prodInfo) => dispatch(actions.addProdToCart(prodInfo)),
+    //   onSetProduct: (productForm) => dispatch(actions.setProduct(productForm)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

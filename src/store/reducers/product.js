@@ -6,6 +6,7 @@ const initialState = {
   productForm: null,
   imageData: null,
   cart: [],
+  totalProdCount: 0,
 };
 
 // const INGREDIENT_PRICES = {
@@ -90,18 +91,22 @@ const reducer = (state = initialState, action) => {
       let tempProdId = action.prodInfo._id;
       let currentProds = state.cart;
       let newProd = { _id: null, prod_name: null, prod_count: 0 };
+      let prodExisted = false;
+      let tempProdTotalCount = 0;
 
       if (currentProds.length !== 0) {
         currentProds.map((currentProd) => {
           if (currentProd.prod_name === tempProdName) {
             currentProd.prod_count++;
-          } else {
-            newProd._id = tempProdId;
-            newProd.prod_name = tempProdName;
-            newProd.prod_count = 1;
-            currentProds.push(newProd);
+            prodExisted = true;
           }
         });
+        if (prodExisted === false) {
+          newProd._id = tempProdId;
+          newProd.prod_name = tempProdName;
+          newProd.prod_count = 1;
+          currentProds.push(newProd);
+        }
       } else {
         newProd._id = tempProdId;
         newProd.prod_name = tempProdName;
@@ -109,10 +114,15 @@ const reducer = (state = initialState, action) => {
         currentProds.push(newProd);
       }
 
+      currentProds.map((currentProd) => {
+        tempProdTotalCount = tempProdTotalCount + currentProd.prod_count;
+      });
+
       return {
         ...state,
 
         cart: currentProds,
+        totalProdCount: tempProdTotalCount,
       };
 
     default:

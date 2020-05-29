@@ -37,7 +37,7 @@ class UIHorizontalCard extends Component {
               )} */}
                 <p className="card-text">
                   <span class="badge badge-success">
-                    Simply order a 4 tyres and have delivery included.
+                    Simply order 4 tyres and have delivery included.
                   </span>
                 </p>
                 <button

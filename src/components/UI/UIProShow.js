@@ -26,7 +26,7 @@ class UIProShow extends Component {
   fetchProdInfo = async () => {
     const response = await fetch("/prods/" + this.props.match.params.variable);
     const body = await response.json();
-    console.log(body);
+    // console.log(body);
     if (response.status !== 200) {
       throw Error(body.message);
     }
@@ -47,9 +47,21 @@ class UIProShow extends Component {
 
   addToCart = () => {
     this.props.onAddProdToCart(this.state.prodInfo);
-    console.log("prodInfo", this.state.prodInfo);
-    console.log("UIProShow  this.props>>", this.props);
+    // console.log("prodInfo", this.state.prodInfo);
+    console.log("UIProShow  this.props.cart>>", this.props.cart);
   };
+
+  clearLocalStorage = () => {
+    // localStorage.clear();
+    // localStorage.removeItem("state.product.cart");
+    // var loadFromLocalStorage = localStorage;
+    var loadFromLocalStorage = localStorage.getItem("state");
+    var JSparse = JSON.parse(localStorage.getItem("state"));
+    console.log(loadFromLocalStorage);
+    console.log(JSparse);
+  };
+
+  // localStorage.clear();
 
   render() {
     console.log("UIProShow  this.props>>", this.props);
@@ -58,6 +70,9 @@ class UIProShow extends Component {
       <div className="switch-component">
         {this.state.prodInfo !== null ? (
           <div>
+            <button className="btn btn-danger" onClick={this.clearLocalStorage}>
+              localStorage
+            </button>
             <UIHorizontalCard
               addToCart={this.addToCart}
               prodInfo={this.state.prodInfo}
