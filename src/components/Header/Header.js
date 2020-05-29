@@ -16,35 +16,39 @@ import "../css/Components.css";
 
 import Logo_White from "../css/images/logoWhite.png";
 
-import { IoIosCheckmarkCircleOutline, IoIosHeartEmpty } from "react-icons/io";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 class Header extends Component {
   state = {
     totalProdCount: 0,
   };
   componentDidMount() {
-    // let JSparse = JSON.parse(localStorage.getItem("state"));
-    // let cart = JSparse.product.cart;
-    // let tempTotalProdCount = this.state.totalProdCount;
-    // if (cart.length !== 0) {
-    //   cart.map((cart) => {
-    //     tempTotalProdCount = tempTotalProdCount + cart.prod_count;
-    //   });
-    // }
-    // this.setState({ totalProdCount: tempTotalProdCount });
+    let parsedJSlocalStorage = JSON.parse(localStorage.getItem("state"));
+    if (parsedJSlocalStorage !== null) {
+      let cart = parsedJSlocalStorage.product.cart;
+      let tempTotalProdCount = this.state.totalProdCount;
+      if (cart.length !== 0) {
+        cart.map((cart) => {
+          tempTotalProdCount = tempTotalProdCount + cart.prod_count;
+        });
+      }
+      this.setState({ totalProdCount: tempTotalProdCount });
+    }
   }
-  componentWillUpdate() {
-    console.log("componentWillUpdate");
-  }
-  componentDidUpdate(prevProps) {
-    // if (!equal(this.props.cart, prevProps.cart)) {
-    //   console.log("Header.js    componentDidUpdate >>", this.props.cart);
-    // }
-    console.log(
-      "Header.js    componentDidUpdate >>",
-      this.props.totalProdCount
-    );
-  }
+  // componentWillUpdate() {
+  //   console.log("componentWillUpdate");
+  // }
+
+  // componentDidUpdate(prevProps) {
+  //   // if (!equal(this.props.cart, prevProps.cart)) {
+  //   //   console.log("Header.js    componentDidUpdate >>", this.props.cart);
+  //   // }
+  //   console.log(
+  //     "Header.js    componentDidUpdate >>",
+  //     this.props.totalProdCount
+  //   );
+
+  // }
 
   componentWillReceiveProps(nextProps) {
     console.log(
@@ -118,7 +122,7 @@ class Header extends Component {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="/">
+              <Nav.Link href="/cart">
                 {this.state.totalProdCount !== 0 ? (
                   this.renderBadges()
                 ) : (

@@ -89,8 +89,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_PRODUCT_TO_CART:
       let tempProdName = action.prodInfo.prod_name;
       let tempProdId = action.prodInfo._id;
+      let tempProdData = action.prodInfo;
       let currentProds = state.cart;
-      let newProd = { _id: null, prod_name: null, prod_count: 0 };
+      let newProd = { _id: null, prod_name: null, prod_count: 0, prodData: {} };
       let prodExisted = false;
       let tempProdTotalCount = 0;
 
@@ -105,12 +106,14 @@ const reducer = (state = initialState, action) => {
           newProd._id = tempProdId;
           newProd.prod_name = tempProdName;
           newProd.prod_count = 1;
+          newProd.prod_data = tempProdData;
           currentProds.push(newProd);
         }
       } else {
         newProd._id = tempProdId;
         newProd.prod_name = tempProdName;
         newProd.prod_count = 1;
+        newProd.prod_data = tempProdData;
         currentProds.push(newProd);
       }
 

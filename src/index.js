@@ -11,7 +11,7 @@ import thunk from "redux-thunk";
 
 import productReducer from "./store/reducers/product";
 
-localStorage.clear();
+// localStorage.clear();
 
 export const saveState = (state) => {
   try {

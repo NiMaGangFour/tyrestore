@@ -6,9 +6,8 @@ import UIHorizontalCard from "./UICardComponents/UIHorizontalCard";
 import UILongCard from "./UICardComponents/UILongCard";
 
 import { connect } from "react-redux";
-// import { ListGroup } from "react-bootstrap";
 
-import "./UIProList.scss";
+// import "./UIProList.scss";
 import * as actions from "../../store/actions/index";
 
 class UIProShow extends Component {
@@ -52,19 +51,18 @@ class UIProShow extends Component {
   };
 
   clearLocalStorage = () => {
-    // localStorage.clear();
-    // localStorage.removeItem("state.product.cart");
-    // var loadFromLocalStorage = localStorage;
-    var loadFromLocalStorage = localStorage.getItem("state");
-    var JSparse = JSON.parse(localStorage.getItem("state"));
-    console.log(loadFromLocalStorage);
-    console.log(JSparse);
+    localStorage.clear();
+
+    // var loadFromLocalStorage = localStorage.getItem("state");
+    // var JSparse = JSON.parse(localStorage.getItem("state"));
+    // console.log(loadFromLocalStorage);
+    // console.log(JSparse);
   };
 
   // localStorage.clear();
 
   render() {
-    console.log("UIProShow  this.props>>", this.props);
+    // console.log("UIProShow  this.props>>", this.props);
 
     return (
       <div className="switch-component">

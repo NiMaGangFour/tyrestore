@@ -80,7 +80,7 @@ $font_family_h1h2: "Bariol";
   background-color: #2b3c90;
 }
 
-//UILongCard
+//  ---  UILongCard  ---
 .ct-button-1 {
   background-color: $theme_color2;
   border: 2px solid $theme_color2;
@@ -93,7 +93,7 @@ $font_family_h1h2: "Bariol";
   }
 }
 
-//UIHorizontalCard
+// --- UIHorizontalCard ---
 .UIHorizontalCard-img {
   margin: 50px 50px;
   padding: 50px 50px;
@@ -107,4 +107,14 @@ $font_family_h1h2: "Bariol";
 
 .UIHorizontalCard-body h5 {
   // margin: 50px 50px;
+}
+
+// --- UICartHorizonCard ---
+.delete-icon {
+  font-size: 30px;
+  margin-bottom: 0 !important;
+}
+
+.ct-cart-header {
+  text-align: right;
 }

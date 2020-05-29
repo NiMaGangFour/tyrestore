@@ -14,6 +14,7 @@ import Admin from "./components/Pages/Admin";
 import Footer from "./components/Footer/Footer";
 import UIProUploadForm from "./components/UI/UIProUploadForm";
 import UIProShow from "./components/UI/UIProShow";
+import UICart from "./components/UI/UICart";
 
 class App extends Component {
   state = {
@@ -129,6 +130,7 @@ class App extends Component {
           <Route exact path="/tyres" component={Tyres} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/tyres/:variable" component={UIProShow} />
+          <Route exact path="/cart" component={UICart} />
         </Switch>
         <Footer />
         <header className="App-header">
