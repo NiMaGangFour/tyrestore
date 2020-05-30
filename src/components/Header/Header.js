@@ -56,6 +56,7 @@ class Header extends Component {
       nextProps.totalProdCount
     );
     this.setState({ totalProdCount: nextProps.totalProdCount });
+    console.log("Header.js  render()>>>  this.props >>", this.props.cart);
     // let tempTotalProdCount = this.state.totalProdCount;
     // if (nextProps.cart.length !== 0) {
     //   nextProps.cart.map((cart) => {
@@ -75,7 +76,7 @@ class Header extends Component {
   };
 
   render() {
-    // console.log("Header.js  render()>>>  this.props >>", this.props);
+    // console.log("Header.js  render()>>>  this.props >>", this.props.cart);
     return (
       <div>
         <Navbar
@@ -152,7 +153,7 @@ const mapStateToProps = (state) => {
   return {
     cart: state.product.cart,
     totalProdCount: state.product.totalProdCount,
-    singleProdCount: state.product.singleProdCount,
+    // singleProdCount: state.product.singleProdCount,
   };
 };
 
