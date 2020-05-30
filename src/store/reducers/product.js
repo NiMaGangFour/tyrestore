@@ -7,6 +7,7 @@ const initialState = {
   imageData: null,
   cart: [],
   totalProdCount: 0,
+  singleProdCount: 0,
 };
 
 // const INGREDIENT_PRICES = {
@@ -85,7 +86,7 @@ const reducer = (state = initialState, action) => {
         // imageLoading: false,
         imageDeleting: false,
       };
-    // ADD PRODUCT TO CART
+    // ADD PRODUCT TO CART & SHOW TOTAL PRODUCT COUNT
     case actionTypes.ADD_PRODUCT_TO_CART:
       let tempProdName = action.prodInfo.prod_name;
       let tempProdId = action.prodInfo._id;
@@ -126,6 +127,30 @@ const reducer = (state = initialState, action) => {
 
         cart: currentProds,
         totalProdCount: tempProdTotalCount,
+      };
+    // INCREASE PROD COUNT IN CART
+    case actionTypes.INCREASE_SINGLE_PROD_COUNT:
+      // let fileredProdsById = state.cart.filter((prod) => {
+      //   return prod.prod_brand.indexOf(action.prodId) !== -1;
+      // });
+      console.log("actionTypes.INCREASE_SINGLE_PROD_COUNT:");
+      let currentProdsInCart = state.cart;
+      let tempSingleProdCount = 0;
+      let tempProdTotal = 0;
+      currentProdsInCart.map((prod) => {
+        if (prod._id === action.prodId) {
+          prod.prod_count++;
+          tempSingleProdCount = prod.prod_count;
+          console.log("tempSingleProdCount", tempSingleProdCount);
+        }
+        tempProdTotal = tempProdTotal + prod.prod_count;
+      });
+
+      return {
+        ...state,
+        cart: currentProdsInCart,
+        singleProdCount: tempSingleProdCount,
+        totalProdCount: tempProdTotal,
       };
 
     default:

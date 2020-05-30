@@ -1,16 +1,31 @@
 import React, { Component } from "react";
-import { RiDeleteBin5Line } from "react-icons/ri";
+import {
+  RiDeleteBin5Line,
+  RiAddBoxLine,
+  RiCheckboxIndeterminateLine,
+} from "react-icons/ri";
+
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions/index";
 
 import "../UICards.scss";
 
 class UICartHorizonCard extends Component {
-  // addProdToCart = () => {
-  //   this.props.addToCart();
-  // };
+  state = {
+    singleProdCount: null,
+  };
 
   deletePordInCart = () => {
     alert("deletePordInCart");
   };
+
+  componentWillReceiveProps(nextProps) {
+    console.log(
+      "Header.js    componentWillReceiveProps>>",
+      nextProps.singleProdCount
+    );
+    this.setState({ singleProdCount: nextProps.singleProdCount });
+  }
 
   imgSrc = () => {
     const imageSrc =
@@ -18,7 +33,7 @@ class UICartHorizonCard extends Component {
     return (
       // <Card.Img variant="top" src={imageSrc} style={{ maxWidth: "240px" }} />
       <img
-        className="card-img UIHorizontalCard-img"
+        className="card-img UIHorizon-Cart-img"
         src={imageSrc}
         alt={imageSrc}
       />
@@ -27,8 +42,17 @@ class UICartHorizonCard extends Component {
     // this.props.cart._id
   };
 
+  increaseSingleProdCount = (id) => {
+    // console.log("increaseSingleProdCount");
+    this.props.onIncreaseSingleProdCount(id);
+  };
+
+  decreaseSingleProdCount = (id) => {
+    this.props.onDecreaseSingleProdCount(id);
+  };
+
   render() {
-    console.log(this.props);
+    console.log("UICartHoeizonCard.js", this.props);
     return (
       <div>
         <div className="card mb-3">
@@ -44,10 +68,10 @@ class UICartHorizonCard extends Component {
               {this.imgSrc()}
             </div>
             <div className="col-md-8">
-              <div className="card-body UIHorizontalCard-body">
-                <h5 className="card-title">
-                  {/* {this.props.cart.prod_data.prod_name} */}
-                </h5>
+              <div className="card-body UIHorizon-Cart-card-body">
+                <h3 className="card-title">
+                  {this.props.prod.prod_data.prod_name}
+                </h3>
                 <p className="card-text">
                   This is a wider card with supporting text below as a natural
                   lead-in to additional content. This content is a little bit
@@ -59,13 +83,35 @@ class UICartHorizonCard extends Component {
                     Simply order 4 tyres and have delivery included.
                   </span>
                 </p>
-                <button
-                  href="/"
-                  className="btn btn-primary ct-button-1"
-                  //   onClick={() => this.addProdToCart()}
+
+                <div
+                  className="btn-group"
+                  role="group"
+                  aria-label="Basic example"
                 >
-                  Add to Cart
-                </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary ct-button-1"
+                    onClick={() =>
+                      this.increaseSingleProdCount(this.props.prod._id)
+                    }
+                  >
+                    <RiAddBoxLine />
+                  </button>
+                  <button type="button" className="btn btn-light ">
+                    {this.props.prod.prod_count}
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary ct-button-1"
+                  >
+                    <RiCheckboxIndeterminateLine
+                      onClick={this.decreaseSingleProdCount(
+                        this.props.prod._id
+                      )}
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -75,4 +121,19 @@ class UICartHorizonCard extends Component {
   }
 }
 
-export default UICartHorizonCard;
+const mapStateToProps = (state) => {
+  return {
+    singleProdCount: state.product.singleProdCount,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onIncreaseSingleProdCount: (id) =>
+      dispatch(actions.increaseSingleProdCount(id)),
+    onDecreaseSingleProdCount: (id) =>
+      dispatch(actions.decreaseSingleProdCount(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UICartHorizonCard);

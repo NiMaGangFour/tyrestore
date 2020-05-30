@@ -164,3 +164,19 @@ export const addProdToCart = (prodInfo) => {
     prodInfo: prodInfo,
   };
 };
+
+/* ACTION: --- INCREASE PROD COUNT IN CART --- */
+export const increaseSingleProdCount = (id) => {
+  return {
+    type: actionTypes.INCREASE_SINGLE_PROD_COUNT,
+    prodId: id,
+  };
+};
+
+/* ACTION: --- DECREASE PROD COUNT IN CART --- */
+export const decreaseSingleProdCount = (id) => {
+  return {
+    type: actionTypes.DECREASE_SINGLE_PROD_COUNT,
+    prodId: id,
+  };
+};

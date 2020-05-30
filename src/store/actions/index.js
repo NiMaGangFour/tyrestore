@@ -3,4 +3,6 @@ export {
   setProductImg,
   deleteProductImg,
   addProdToCart,
+  increaseSingleProdCount,
+  decreaseSingleProdCount,
 } from "./product";

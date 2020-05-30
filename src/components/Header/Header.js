@@ -152,6 +152,7 @@ const mapStateToProps = (state) => {
   return {
     cart: state.product.cart,
     totalProdCount: state.product.totalProdCount,
+    singleProdCount: state.product.singleProdCount,
   };
 };
 

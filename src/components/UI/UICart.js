@@ -32,13 +32,13 @@ class UICart extends Component {
     );
   };
 
-  //   componentWillReceiveProps(nextProps) {
-  //     console.log(
-  //       "UICart.js    componentWillReceiveProps  nextProps.cart>>",
-  //       nextProps.cart
-  //     );
-  //     this.setState({ cart: nextProps.cart });
-  //   }
+  componentWillReceiveProps(nextProps) {
+    console.log(
+      "UICart.js    componentWillReceiveProps  nextProps.singleProdCount>>",
+      nextProps.singleProdCount
+    );
+    this.setState({ cart: nextProps.cart });
+  }
 
   //   imgSrc={this.imgSrc(this.state.cart)}
 
@@ -64,6 +64,7 @@ class UICart extends Component {
 const mapStateToProps = (state) => {
   return {
     cart: state.product.cart,
+    singleProdCount: state.product.singleProdCount,
   };
 };
 
