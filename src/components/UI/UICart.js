@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import { Card, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import "./UICards.scss";
@@ -46,7 +45,6 @@ class UICart extends Component {
   render() {
     return (
       <div className="switch-component">
-        {" "}
         <h2>UICart</h2>
         {/* {this.renderProducts()} */}
         {this.state.cart !== null

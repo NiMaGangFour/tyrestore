@@ -57,13 +57,6 @@ class Header extends Component {
     );
     this.setState({ totalProdCount: nextProps.totalProdCount });
     console.log("Header.js  render()>>>  this.props >>", this.props.cart);
-    // let tempTotalProdCount = this.state.totalProdCount;
-    // if (nextProps.cart.length !== 0) {
-    //   nextProps.cart.map((cart) => {
-    //     tempTotalProdCount = tempTotalProdCount + cart.prod_count;
-    //   });
-    // }
-    // this.setState({ totalProdCount: tempTotalProdCount });
   }
 
   renderBadges = () => {

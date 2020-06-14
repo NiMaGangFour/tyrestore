@@ -134,23 +134,50 @@ const reducer = (state = initialState, action) => {
       //   return prod.prod_brand.indexOf(action.prodId) !== -1;
       // });
       console.log("actionTypes.INCREASE_SINGLE_PROD_COUNT:");
-      let currentProdsInCart = state.cart;
+      let currentProdsInCartIN = state.cart;
       let tempSingleProdCount = 0;
       let tempProdTotal = 0;
-      currentProdsInCart.map((prod) => {
+      currentProdsInCartIN.map((prod) => {
         if (prod._id === action.prodId) {
           prod.prod_count++;
           tempSingleProdCount = prod.prod_count;
           console.log("tempSingleProdCount", tempSingleProdCount);
         }
         tempProdTotal = tempProdTotal + prod.prod_count;
+        console.log("tempProdTotal", tempProdTotal);
       });
 
       return {
         ...state,
-        cart: currentProdsInCart,
+        cart: currentProdsInCartIN,
         singleProdCount: tempSingleProdCount,
         totalProdCount: tempProdTotal,
+      };
+
+    // DECREASE PROD COUNT IN CART
+    case actionTypes.DECREASE_SINGLE_PROD_COUNT:
+      // let fileredProdsById = state.cart.filter((prod) => {
+      //   return prod.prod_brand.indexOf(action.prodId) !== -1;
+      // });
+      console.log("actionTypes.INCREASE_SINGLE_PROD_COUNT:");
+      let currentProdsInCartDE = state.cart;
+      let tempSingleProdCountDE = 0;
+      let tempProdTotalDE = 0;
+      currentProdsInCartDE.map((prod) => {
+        if (prod._id === action.prodId && prod.prod_count > 0) {
+          prod.prod_count--;
+          tempSingleProdCountDE = prod.prod_count;
+          console.log("tempSingleProdCountDE", tempSingleProdCountDE);
+        }
+        tempProdTotalDE = tempProdTotalDE + prod.prod_count;
+        console.log("tempProdTotalDE", tempProdTotalDE);
+      });
+
+      return {
+        ...state,
+        cart: currentProdsInCartDE,
+        singleProdCount: tempSingleProdCountDE,
+        totalProdCount: tempProdTotalDE,
       };
 
     default:

@@ -11,9 +11,9 @@ import * as actions from "../../../store/actions/index";
 import "../UICards.scss";
 
 class UICartHorizonCard extends Component {
-  state = {
-    singleProdCount: null,
-  };
+  // state = {
+  //   singleProdCount: null,
+  // };
 
   deletePordInCart = () => {
     alert("deletePordInCart");
@@ -24,7 +24,6 @@ class UICartHorizonCard extends Component {
       "Header.js    componentWillReceiveProps>>",
       nextProps.singleProdCount
     );
-    this.setState({ singleProdCount: nextProps.singleProdCount });
   }
 
   imgSrc = () => {
@@ -72,11 +71,7 @@ class UICartHorizonCard extends Component {
                 <h3 className="card-title">
                   {this.props.prod.prod_data.prod_name}
                 </h3>
-                <p className="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
+                {this.props.prod.prod_data.prod_info}
 
                 <p className="card-text">
                   <span class="badge badge-success">
@@ -98,17 +93,19 @@ class UICartHorizonCard extends Component {
                   >
                     <RiAddBoxLine />
                   </button>
+
                   <button type="button" className="btn btn-light ">
                     {this.props.prod.prod_count}
                   </button>
+
                   <button
                     type="button"
                     className="btn btn-secondary ct-button-1"
                   >
                     <RiCheckboxIndeterminateLine
-                      onClick={this.decreaseSingleProdCount(
-                        this.props.prod._id
-                      )}
+                      onClick={() =>
+                        this.decreaseSingleProdCount(this.props.prod._id)
+                      }
                     />
                   </button>
                 </div>
