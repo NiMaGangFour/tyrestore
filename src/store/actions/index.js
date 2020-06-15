@@ -5,4 +5,5 @@ export {
   addProdToCart,
   increaseSingleProdCount,
   decreaseSingleProdCount,
+  deletePordInCart,
 } from "./product";

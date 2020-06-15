@@ -113,6 +113,10 @@ $font_family_h1h2: "Bariol";
 .delete-icon {
   font-size: 30px;
   margin-bottom: 0 !important;
+  transition: color 0.8s;
+  &:hover {
+    color: red;
+  }
 }
 
 .ct-cart-header {

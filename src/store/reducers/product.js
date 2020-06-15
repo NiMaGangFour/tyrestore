@@ -133,7 +133,7 @@ const reducer = (state = initialState, action) => {
       // let fileredProdsById = state.cart.filter((prod) => {
       //   return prod.prod_brand.indexOf(action.prodId) !== -1;
       // });
-      console.log("actionTypes.INCREASE_SINGLE_PROD_COUNT:");
+      // console.log("actionTypes.INCREASE_SINGLE_PROD_COUNT:");
       let currentProdsInCartIN = state.cart;
       let tempSingleProdCount = 0;
       let tempProdTotal = 0;
@@ -159,12 +159,12 @@ const reducer = (state = initialState, action) => {
       // let fileredProdsById = state.cart.filter((prod) => {
       //   return prod.prod_brand.indexOf(action.prodId) !== -1;
       // });
-      console.log("actionTypes.INCREASE_SINGLE_PROD_COUNT:");
+      // console.log("actionTypes.DECREASE_SINGLE_PROD_COUNT:");
       let currentProdsInCartDE = state.cart;
       let tempSingleProdCountDE = 0;
       let tempProdTotalDE = 0;
       currentProdsInCartDE.map((prod) => {
-        if (prod._id === action.prodId && prod.prod_count > 0) {
+        if (prod._id === action.prodId && prod.prod_count > 1) {
           prod.prod_count--;
           tempSingleProdCountDE = prod.prod_count;
           console.log("tempSingleProdCountDE", tempSingleProdCountDE);
@@ -178,6 +178,31 @@ const reducer = (state = initialState, action) => {
         cart: currentProdsInCartDE,
         singleProdCount: tempSingleProdCountDE,
         totalProdCount: tempProdTotalDE,
+      };
+
+    // DELETE PROD IN CART
+    case actionTypes.DELETE_PROD_IN_CART:
+      // let fileredProdsById = state.cart.filter((prod) => {
+      //   return prod.prod_brand.indexOf(action.prodId) !== -1;
+      // });
+      // console.log("actionTypes.DECREASE_SINGLE_PROD_COUNT:");
+      let tempProdTotalFiltered = 0;
+      let currentCart = state.cart;
+      let filteredCart = [];
+      currentCart.map((prod) => {
+        if (prod._id !== action.prodId) {
+          filteredCart.push(prod);
+          tempProdTotalFiltered = tempProdTotalFiltered + prod.prod_count;
+        }
+
+        // tempProdTotalDE = tempProdTotalDE + prod.prod_count;
+        // console.log("tempProdTotalDE", tempProdTotalDE);
+      });
+
+      return {
+        ...state,
+        cart: filteredCart,
+        totalProdCount: tempProdTotalFiltered,
       };
 
     default:

@@ -180,3 +180,11 @@ export const decreaseSingleProdCount = (id) => {
     prodId: id,
   };
 };
+
+/* ACTION: --- DECREASE PROD COUNT IN CART --- */
+export const deletePordInCart = (id) => {
+  return {
+    type: actionTypes.DELETE_PROD_IN_CART,
+    prodId: id,
+  };
+};

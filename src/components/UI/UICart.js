@@ -36,6 +36,10 @@ class UICart extends Component {
       "UICart.js    componentWillReceiveProps  nextProps.singleProdCount>>",
       nextProps.singleProdCount
     );
+    console.log(
+      "UICart.js    componentWillReceiveProps  nextProps.cart>>",
+      nextProps.cart
+    );
     this.setState({ cart: nextProps.cart });
   }
 
@@ -46,14 +50,21 @@ class UICart extends Component {
     return (
       <div className="switch-component">
         <h2>UICart</h2>
-        {/* {this.renderProducts()} */}
-        {this.state.cart !== null
-          ? this.state.cart.map((prod) => (
-              <div>
-                <UICartHorizonCard prod={prod} />
-              </div>
-            ))
-          : null}
+        <div className="container">
+          <div class="row">
+            {/* {this.renderProducts()} */}
+            {this.state.cart !== null
+              ? this.state.cart.map((prod) => (
+                  <div className="col-9">
+                    <UICartHorizonCard prod={prod} />
+                  </div>
+                ))
+              : null}
+            <div className="col-3">
+              <h2>clo=3</h2>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

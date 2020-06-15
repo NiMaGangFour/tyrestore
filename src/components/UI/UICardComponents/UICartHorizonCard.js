@@ -50,14 +50,21 @@ class UICartHorizonCard extends Component {
     this.props.onDecreaseSingleProdCount(id);
   };
 
+  deletePordInCart = (id) => {
+    this.props.onDeletePordInCart(id);
+  };
+
   render() {
     console.log("UICartHoeizonCard.js", this.props);
     return (
       <div>
-        <div className="card mb-3">
+        <div className="card lg-3">
           {/* <h5 class="card-header">Tyre Overview</h5> */}
           <div className="card-header ct-cart-header delete-icon">
-            <p className="delete-icon" onClick={this.deletePordInCart}>
+            <p
+              className="delete-icon"
+              onClick={() => this.deletePordInCart(this.props.prod._id)}
+            >
               <RiDeleteBin5Line />
             </p>
           </div>
@@ -130,6 +137,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.increaseSingleProdCount(id)),
     onDecreaseSingleProdCount: (id) =>
       dispatch(actions.decreaseSingleProdCount(id)),
+    onDeletePordInCart: (id) => dispatch(actions.deletePordInCart(id)),
   };
 };
 
