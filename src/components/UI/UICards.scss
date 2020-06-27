@@ -119,6 +119,10 @@ $font_family_h1h2: "Bariol";
   }
 }
 
+.ct-delete-btn {
+  font-size: 20px;
+}
+
 .ct-cart-header {
   text-align: right;
 }
@@ -126,7 +130,7 @@ $font_family_h1h2: "Bariol";
 .UIHorizon-Cart-img {
   margin: 30px 30px;
   padding: 20px 20px;
-  width: 50%;
+  width: 75%;
   border: 5px solid #f6f6f6;
 }
 
@@ -135,3 +139,18 @@ $font_family_h1h2: "Bariol";
   margin: 30px 30px;
   text-align: left;
 }
+
+.ct-UIHorizon-cart-card {
+  border: 0px solid rgba(0, 0, 0, 0.125) !important;
+}
+
+// --- UICartHorizonCard ---
+
+// --- UICartHeaderAnnounce ---
+.ct-UICartHeaderAnnounce {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 3px solid rgba(0, 0, 0, 0.125) !important;
+}
+
+// --- UICartHeaderAnnounce ---

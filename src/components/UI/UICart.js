@@ -5,6 +5,9 @@ import * as actions from "../../store/actions/index";
 import "./UICards.scss";
 import "../css/Components.css";
 import UICartHorizonCard from "./UICardComponents/UICartHorizonCard";
+import UICartHeader from "./UICardComponents/UICartHeader";
+import UICartHeaderAnnounce from "./UICardComponents/UICartHeaderAnnounce";
+import UICartListTitle from "./UICardComponents/UICartListTitle";
 
 class UICart extends Component {
   state = {
@@ -49,17 +52,23 @@ class UICart extends Component {
   render() {
     return (
       <div className="switch-component">
-        <h2>UICart</h2>
+        <UICartHeader />
         <div className="container">
+          <UICartHeaderAnnounce />
           <div class="row">
             {/* {this.renderProducts()} */}
-            {this.state.cart !== null
-              ? this.state.cart.map((prod) => (
-                  <div className="col-9">
-                    <UICartHorizonCard prod={prod} />
-                  </div>
-                ))
-              : null}
+
+            <div className="col-9">
+              <h2>col-9</h2>
+              <UICartListTitle />
+              {this.state.cart !== null
+                ? this.state.cart.map((prod) => (
+                    <div>
+                      <UICartHorizonCard prod={prod} />
+                    </div>
+                  ))
+                : null}
+            </div>
             <div className="col-3">
               <h2>clo=3</h2>
             </div>
