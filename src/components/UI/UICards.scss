@@ -149,8 +149,21 @@ $font_family_h1h2: "Bariol";
 // --- UICartHeaderAnnounce ---
 .ct-UICartHeaderAnnounce {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 70px;
   border: 3px solid rgba(0, 0, 0, 0.125) !important;
 }
 
 // --- UICartHeaderAnnounce ---
+
+// --- UICartOrderSummary ---
+.ct-totalPrice {
+  background-color: $theme_color2;
+}
+
+.ct-totalPrice h5 {
+  color: #ffffff;
+  font-size: 140%;
+  font-weight: 600;
+}
+
+// --- UICartOrderSummary ---

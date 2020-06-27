@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap";
 
 import { connect } from "react-redux";
-import equal from "fast-deep-equal";
 import * as actions from "../../store/actions/index";
 
 import "../css/Components.css";

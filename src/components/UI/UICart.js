@@ -8,6 +8,7 @@ import UICartHorizonCard from "./UICardComponents/UICartHorizonCard";
 import UICartHeader from "./UICardComponents/UICartHeader";
 import UICartHeaderAnnounce from "./UICardComponents/UICartHeaderAnnounce";
 import UICartListTitle from "./UICardComponents/UICartListTitle";
+import UICartOrderSummary from "./UICardComponents/UICartOrderSummary";
 
 class UICart extends Component {
   state = {
@@ -59,7 +60,6 @@ class UICart extends Component {
             {/* {this.renderProducts()} */}
 
             <div className="col-9">
-              <h2>col-9</h2>
               <UICartListTitle />
               {this.state.cart !== null
                 ? this.state.cart.map((prod) => (
@@ -70,7 +70,7 @@ class UICart extends Component {
                 : null}
             </div>
             <div className="col-3">
-              <h2>clo=3</h2>
+              <UICartOrderSummary />
             </div>
           </div>
         </div>
