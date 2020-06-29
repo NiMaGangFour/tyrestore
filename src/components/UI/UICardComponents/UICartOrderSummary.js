@@ -16,7 +16,7 @@ class UICartOrderSummary extends Component {
   render() {
     console.log(this.props.cart);
     return (
-      <div class="card text-center">
+      <div class="card text-center ct-card-UICartOrderSummary">
         {/* <div class="card-header">Featured</div> */}
         <div class="card-body">
           <h5>ORDER SUMMARY</h5>
@@ -28,7 +28,7 @@ class UICartOrderSummary extends Component {
             Go somewhere
           </a> */}
         </div>
-        <div class="card-body ct-totalPrice">
+        <div class="card-body">
           <h5>{this.props.totalProdCount} Items</h5>
         </div>
         <div class="card-body ct-totalPrice">{this.totalPrice()}</div>

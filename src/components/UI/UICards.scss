@@ -40,6 +40,37 @@ $font_family_h1h2: "Bariol";
   }
 }
 
+.btn-03 {
+  color: $theme_color2;
+  border: 2px solid $theme_color2;
+  background-color: #fff;
+  font-weight: 600;
+  transition: border 0.2s, color 0.2s, background-color 0.2s;
+  &:hover {
+    color: #fff;
+    border: 2px solid $theme_color2;
+    background-color: $theme_color2;
+  }
+}
+
+.btn-continue-shopping {
+  margin: 30px 0px;
+}
+
+.ct-checkout {
+  margin-top: 30px;
+  background-color: $theme_color2;
+  border: 3px solid $theme_color2;
+  color: #ffffff;
+  cursor: pointer;
+  transition: border 0.2s, background-color 0.2s;
+  &:hover {
+    color: $theme_color2;
+    border: 3px solid $theme_color2;
+    background-color: #ffffff;
+  }
+}
+
 .form-select {
   text-align: center;
   text-align-last: center;
@@ -166,4 +197,14 @@ $font_family_h1h2: "Bariol";
   font-weight: 600;
 }
 
+.ct-card-UICartOrderSummary {
+  border: 3px solid $theme_color2;
+}
 // --- UICartOrderSummary ---
+
+// --- UICartVoucher ---
+.ct-input-group-voucher {
+  margin-top: 30px;
+  border: 3px solid $theme_color2;
+}
+// --- UICartVoucher ---

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-
+import { Nav } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+
 import "./UICards.scss";
 import "../css/Components.css";
 import UICartHorizonCard from "./UICardComponents/UICartHorizonCard";
@@ -9,6 +10,7 @@ import UICartHeader from "./UICardComponents/UICartHeader";
 import UICartHeaderAnnounce from "./UICardComponents/UICartHeaderAnnounce";
 import UICartListTitle from "./UICardComponents/UICartListTitle";
 import UICartOrderSummary from "./UICardComponents/UICartOrderSummary";
+import UICartVoucher from "./UICardComponents/UICartVoucher";
 
 class UICart extends Component {
   state = {
@@ -68,9 +70,26 @@ class UICart extends Component {
                     </div>
                   ))
                 : null}
+
+              <a href="/tyres">
+                <button
+                  className="btn btn-block btn-lg btn-03 btn-continue-shopping"
+                  type="button"
+                  id="button-addon2"
+                >
+                  ＜ Continue shopping
+                </button>
+              </a>
             </div>
+
             <div className="col-3">
               <UICartOrderSummary />
+
+              <UICartVoucher />
+
+              <div class="card-body ct-checkout">
+                <h5>Proceed to checkout</h5>
+              </div>
             </div>
           </div>
         </div>

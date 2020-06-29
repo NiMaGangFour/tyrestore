@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap";
 
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
 
 import "../css/Components.css";
 
