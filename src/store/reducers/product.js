@@ -91,6 +91,7 @@ const reducer = (state = initialState, action) => {
       let tempProdName = action.prodInfo.prod_name;
       let tempProdId = action.prodInfo._id;
       let tempProdData = action.prodInfo;
+      let tempProdCount = action.prodCount;
       let currentProds = state.cart;
       let newProd = { _id: null, prod_name: null, prod_count: 0, prodData: {} };
       let prodExisted = false;
@@ -99,21 +100,23 @@ const reducer = (state = initialState, action) => {
       if (currentProds.length !== 0) {
         currentProds.map((currentProd) => {
           if (currentProd.prod_name === tempProdName) {
-            currentProd.prod_count++;
+            // currentProd.prod_count++;
+            currentProd.prod_count = currentProd.prod_count + tempProdCount;
             prodExisted = true;
           }
         });
+
         if (prodExisted === false) {
           newProd._id = tempProdId;
           newProd.prod_name = tempProdName;
-          newProd.prod_count = 1;
+          newProd.prod_count = tempProdCount;
           newProd.prod_data = tempProdData;
           currentProds.push(newProd);
         }
       } else {
         newProd._id = tempProdId;
         newProd.prod_name = tempProdName;
-        newProd.prod_count = 1;
+        newProd.prod_count = tempProdCount;
         newProd.prod_data = tempProdData;
         currentProds.push(newProd);
       }

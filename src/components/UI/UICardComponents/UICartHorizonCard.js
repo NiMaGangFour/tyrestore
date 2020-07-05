@@ -117,6 +117,7 @@ class UICartHorizonCard extends Component {
               <button
                 type="button"
                 class="btn btn-outline-danger ct-delete-btn"
+                onClick={() => this.deletePordInCart(this.props.prod._id)}
               >
                 <RiDeleteBin5Line />
               </button>

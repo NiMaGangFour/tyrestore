@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import "../css/Components.css";
 import "./UICards.scss";
 import UIHorizontalCard from "./UICardComponents/UIHorizontalCard";
-import UILongCard from "./UICardComponents/UILongCard";
 
 import { connect } from "react-redux";
 
@@ -44,10 +43,11 @@ class UIProShow extends Component {
     );
   };
 
-  addToCart = () => {
-    this.props.onAddProdToCart(this.state.prodInfo);
+  addToCart = (prodCount) => {
+    this.props.onAddProdToCart(this.state.prodInfo, prodCount);
     // console.log("prodInfo", this.state.prodInfo);
     console.log("UIProShow  this.props.cart>>", this.props.cart);
+    console.log("UIProShow  prodCount", prodCount);
   };
 
   clearLocalStorage = () => {
@@ -76,8 +76,6 @@ class UIProShow extends Component {
               prodInfo={this.state.prodInfo}
               imgSrc={this.imgSrc(this.state.prodInfo.prod_image_id)}
             />
-            <hr />
-            <UILongCard prodInfo={this.state.prodInfo} />
           </div>
         ) : (
           <h3> Can not get >>> this.state.prodInfo</h3>
@@ -95,7 +93,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddProdToCart: (prodInfo) => dispatch(actions.addProdToCart(prodInfo)),
+    onAddProdToCart: (prodInfo, prodCount) =>
+      dispatch(actions.addProdToCart(prodInfo, prodCount)),
     //   onSetProduct: (productForm) => dispatch(actions.setProduct(productForm)),
   };
 };

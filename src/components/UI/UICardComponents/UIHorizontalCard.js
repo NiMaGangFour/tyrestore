@@ -1,9 +1,34 @@
 import React, { Component } from "react";
+
+import {
+  RiDeleteBin5Line,
+  RiAddBoxLine,
+  RiCheckboxIndeterminateLine,
+} from "react-icons/ri";
 import "../UICards.scss";
 
 class UIHorizontalCard extends Component {
+  state = {
+    prodCount: 1,
+  };
+
+  increaseSingleProdCount = () => {
+    let tempProdCount = this.state.prodCount;
+    console.log(tempProdCount);
+    this.setState({ prodCount: tempProdCount + 1 });
+  };
+
+  decreaseSingleProdCount = () => {
+    let tempProdCount = this.state.prodCount;
+    console.log(tempProdCount);
+    if (tempProdCount > 1) {
+      this.setState({ prodCount: tempProdCount - 1 });
+    }
+  };
+
   addProdToCart = () => {
-    this.props.addToCart();
+    let tempProdCount = this.state.prodCount;
+    this.props.addToCart(tempProdCount);
   };
 
   render() {
@@ -18,35 +43,77 @@ class UIHorizontalCard extends Component {
             </div>
             <div className="col-md-8">
               <div className="card-body UIHorizontalCard-body">
-                <h5 className="card-title">{this.props.prodInfo.prod_name}</h5>
-                <p className="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                {/* {prodInfo.prod_status === "Available" ? (
-                <p className="card-text">
-                  <span class="badge badge-success">
-                    {prodInfo.prod_status}
-                  </span>
-                </p>
-              ) : (
-                <p className="card-text">
-                  <span class="badge badge-danger">{prodInfo.prod_status}</span>
-                </p>
-              )} */}
-                <p className="card-text">
-                  <span class="badge badge-success">
-                    Simply order 4 tyres and have delivery included.
-                  </span>
-                </p>
-                <button
-                  href="/"
-                  className="btn btn-primary ct-button-1"
-                  onClick={() => this.addProdToCart()}
-                >
-                  Add to Cart
-                </button>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <h5>Product Name</h5>
+                    {this.props.prodInfo.prod_name}
+                  </li>
+                  <li class="list-group-item">
+                    <h5>Product Information</h5>
+                    {this.props.prodInfo.prod_info}
+                  </li>
+                  <li class="list-group-item">
+                    <h5>Product Details</h5>
+                    {this.props.prodInfo.prod_details}
+                  </li>
+                  <li class="list-group-item">
+                    <h5>
+                      <span class="badge badge-success">
+                        Simply order 4 tyres and have delivery included.
+                      </span>
+                    </h5>
+                  </li>
+                </ul>
+
+                <div className="ct-3-btns">
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <button
+                      type="button"
+                      className="btn btn-secondary ct-button-1"
+                      onClick={() => this.increaseSingleProdCount()}
+                    >
+                      <RiAddBoxLine />
+                    </button>
+
+                    <button type="button" className="btn btn-light ">
+                      {this.state.prodCount}
+                    </button>
+
+                    <button
+                      type="button"
+                      className="btn btn-secondary ct-button-1"
+                    >
+                      <RiCheckboxIndeterminateLine
+                        onClick={() => this.decreaseSingleProdCount()}
+                      />
+                    </button>
+                  </div>
+
+                  <button
+                    href="/"
+                    className="btn btn-block btn-primary ct-button-1 add-to-cart-btn"
+                    onClick={() => this.addProdToCart()}
+                  >
+                    Add to Cart
+                  </button>
+
+                  <button
+                    href="/"
+                    className="btn btn-block btn-lg btn-03 add-to-cart-btn"
+                  >
+                    Proceed to checkout ＞
+                  </button>
+
+                  <a href="/tyres">
+                    <button className="btn btn-block btn-lg btn-03 add-to-cart-btn">
+                      ＜ Continue shopping
+                    </button>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

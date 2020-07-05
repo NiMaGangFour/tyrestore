@@ -134,6 +134,7 @@ $font_family_h1h2: "Bariol";
 
 .UIHorizontalCard-body {
   margin: 50px 50px;
+  text-align: left;
 }
 
 .UIHorizontalCard-body h5 {
@@ -173,6 +174,15 @@ $font_family_h1h2: "Bariol";
 
 .ct-UIHorizon-cart-card {
   border: 0px solid rgba(0, 0, 0, 0.125) !important;
+}
+
+.add-to-cart-btn {
+  margin-top: 10px;
+}
+
+.ct-3-btns {
+  margin-top: 10px;
+  text-align: center;
 }
 
 // --- UICartHorizonCard ---
